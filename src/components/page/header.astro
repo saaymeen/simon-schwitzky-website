@@ -1,0 +1,81 @@
+---
+import { Anchor } from '../astro';
+import Logo from './logo.astro';
+import { LuArrowRight } from 'react-icons/lu';
+---
+
+<header class="fixed w-full top-0 bg-black text-black px-4 sm:px-12 py-5 flex z-20">
+	<div class="flex max-w-7xl flex-1 items-center mx-auto">
+		<div class="flex-1 mr-auto flex text-white">
+			<Logo />
+		</div>
+
+		<nav class="hidden sm:flex items-center text-white">
+			<ul class="flex space-x-5 text-xs items-center">
+				<li>
+					<a class="text-neutral-200 hover:text-white hover:underline block transition-colors cursor-pointer">
+						About
+					</a>
+				</li>
+				<li>
+					<a class="text-neutral-200 hover:text-white hover:underline block transition-colors cursor-pointer">
+						Works
+					</a>
+				</li>
+				<li>
+					<a class="text-neutral-200 hover:text-white hover:underline block transition-colors cursor-pointer">
+						Editorial
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="flex-1 ml-auto flex justify-end">
+			<Anchor icon={LuArrowRight} href="/contact"> Kennenlernen </Anchor>
+		</div>
+	</div>
+</header>
+
+<script>
+	const header = document.querySelector('header');
+	const masthead = document.querySelector('#masthead');
+
+	const headerFound = typeof header !== 'undefined' && header !== null;
+	let headerHeight = 0;
+	if (headerFound) {
+		headerHeight = header.getBoundingClientRect().height;
+	}
+
+	const mastheadFound = typeof masthead !== 'undefined' && masthead !== null;
+
+	// header is initially black, if JS is disabled site will still display well
+	if (headerFound) {
+		const mastheadHeight = mastheadFound ? masthead.clientHeight : window.innerHeight;
+
+		if (window.scrollY > mastheadHeight - headerHeight) {
+			header.style.backdropFilter = 'blur(4px)';
+			header.style.webkitBackdropFilter = 'blur(4px)';
+			header.style.backgroundColor = 'black';
+		} else {
+			header.style.backgroundColor = 'transparent';
+			header.style.backdropFilter = '';
+			header.style.webkitBackdropFilter = '';
+		}
+	}
+
+	document.addEventListener('scroll', () => {
+		const mastheadHeight = mastheadFound ? masthead.clientHeight : window.innerHeight;
+
+		if (headerFound) {
+			if (window.scrollY > mastheadHeight - headerHeight) {
+				header.style.backdropFilter = 'blur(4px)';
+				header.style.backgroundColor = 'rgba(0,0,0,0.7)';
+				header.style.webkitBackdropFilter = 'blur(4px)';
+			} else {
+				header.style.backgroundColor = 'transparent';
+				header.style.webkitBackdropFilter = '';
+				header.style.backdropFilter = '';
+			}
+		}
+	});
+</script>

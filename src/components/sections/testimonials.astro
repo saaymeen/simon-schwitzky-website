@@ -1,0 +1,23 @@
+---
+import { LuArrowRight } from 'react-icons/lu';
+
+import { Anchor } from '../astro';
+import { TestimonialSlider } from '../react';
+---
+
+<section style={{ transform: 'translate3d(0,0,0)' }} class="bg-black text-white pt-24 pb-16">
+	<div class="px-4 md:px-12">
+		<div class="max-w-7xl mx-auto w-full flex flex-col pt-16 pb-16">
+			<span class="mb-1 text-neutral-200">Don't take my word for it:</span>
+			<h2 class="text-5xl mb-12">What other bussineses say about me</h2>
+		</div>
+	</div>
+	<TestimonialSlider client:load />
+	<div class="px-4 sm:px-12">
+		<div class="max-w-7xl mx-auto w-full flex flex-col items-start">
+			<Anchor href="/contact" size="lg" icon={LuArrowRight} class="mt-7" theme="primary"
+				>Let's work together</Anchor
+			>
+		</div>
+	</div>
+</section>

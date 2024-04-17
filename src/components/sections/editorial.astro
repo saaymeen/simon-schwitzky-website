@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import { LuArrowRight } from 'react-icons/lu';
+
+import blogImage from 'assets/service-1.jpg';
+import { Anchor } from '../astro';
+
+const desription = 'Lorem ipsum dolor set amet lorem ipsum dolor sit amet lorem ipsum dolor set amet.';
+
+const stories = [
+	{
+		id: 1,
+		title: 'Must-Have Features of a Coffee Shop Mobile',
+		desription,
+		date: 'March 1st, 2024',
+		readDurationMinutes: 8,
+		image: blogImage,
+		category: 'News',
+	},
+	{
+		id: 2,
+		title: 'Role of Generative AI in Digital Transformation',
+		desription,
+		date: 'Jan 4th, 2024',
+		readDurationMinutes: 8,
+		image: blogImage,
+		category: 'Blog',
+	},
+	{
+		id: 3,
+		title: 'WAC Gifts its first Employee a Mercedes Benz',
+		desription,
+		date: 'March 1st, 2024',
+		readDurationMinutes: 8,
+		image: blogImage,
+		category: 'Blog',
+	},
+];
+
+// TODO: restrict title and description to n lines
+---
+
+<section style={{ transform: 'translate3d(0,0,0)' }} class="bg-neutral-100 text-black px-4 sm:px-12">
+	<div class="max-w-7xl mx-auto w-full flex flex-col pt-24 pb-16">
+		<span class="mb-1 text-neutral-600">Editorial</span>
+		<h2 class="text-5xl mb-12">Read more about my experiences</h2>
+		<ul class="grid grid-cols-1 grid-rows-3 gap-y-7 gap-x-12 md:grid-cols-3 md:grid-rows-1">
+			{
+				stories.map((story) => (
+					<li class="flex flex-col">
+						<a class="cursor-pointer group flex-1 flex flex-col">
+							<figure class="flex-1 bg-white rounded-sm overflow-hidden flex flex-col xs:grid xs:grid-cols-[1fr,3fr] grid-rows-1 md:flex md:flex-col">
+								<div class="hidden md:flex aspect-square overflow-hidden relative h-full">
+									<Image
+										alt=""
+										src={story.image}
+										class="flex w-full h-full absolute object-cover transition-transform duration-300 group-hover:scale-[1.05]"
+									/>
+								</div>
+								<Image
+									alt=""
+									src={story.image}
+									class="h-full hidden xs:flex md:hidden object-cover transition-transform duration-300 group-hover:scale-[1.05]"
+								/>
+								<figcaption class="flex-1 flex flex-col px-4 pb-2 pt-3">
+									<div class="grid grid-cols-[3fr,1fr]">
+										<div class="flex flex-col mr-4">
+											<span class="text-xs bg-blue-100 text-blue-600 rounded-md px-3 py-1 self-start">
+												{story.category}
+											</span>
+											<span class="text-lg font-bold mt-2">{story.title}</span>
+										</div>
+										<Image
+											alt=""
+											src={story.image}
+											class="xs:hidden h-full rounded-sm md:hidden object-cover transition-transform duration-300 group-hover:scale-[1.05]"
+										/>
+									</div>
+									<div class="hidden xs:flex flex-1">
+										<p class="text-neutral-600 text-sm leading-tight mt-1 mr-5 xs:mr-0">
+											{story.desription}
+										</p>
+									</div>
+
+									<div class="flex items-center mt-2 font-medium text-neutral-400 text-xs">
+										<span>{story.date}</span>
+										<span class="mx-1">•</span>
+										<pan>{story.readDurationMinutes} min read</pan>
+									</div>
+								</figcaption>
+							</figure>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<div class="flex justify-end md:justify-start">
+			<Anchor icon={LuArrowRight} href="/editorial" class="self-start mt-7" theme="primary" size="lg">
+				Explore all insights
+			</Anchor>
+		</div>
+	</div>
+</section>

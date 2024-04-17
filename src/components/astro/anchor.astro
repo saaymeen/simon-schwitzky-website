@@ -1,0 +1,37 @@
+---
+import clsx from 'clsx';
+import { type IconType } from 'react-icons/lib';
+
+interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
+	icon: IconType;
+	size?: 'base' | 'lg';
+	theme?: 'primary' | 'secondary';
+}
+
+const { icon: Icon, size = 'base', theme = 'secondary', class: className, ...rest } = Astro.props;
+---
+
+<a
+	class={clsx(
+		'flex items-center transition-colors rounded-sm group cursor-pointer',
+		size === 'base' && 'text-xs py-2 pl-3 pr-2',
+		size === 'lg' && 'text-base py-3 pl-5 pr-3',
+		theme === 'secondary' && 'bg-neutral-800 hover:bg-neutral-700 text-white',
+		theme === 'primary' && 'border-blue-500 bg-blue-600 text-white',
+
+		className
+	)}
+	{...rest}
+>
+	<span class="block">
+		<slot />
+	</span>
+	<Icon
+		size={clsx(size === 'base' && 12, size === 'lg' && 16)}
+		className={clsx(
+			'block transition-all',
+			size === 'base' && 'mr-1 ml-1 group-hover:ml-2 group-hover:mr-0',
+			size === 'lg' && 'mr-2 ml-2 group-hover:ml-3 group-hover:mr-1'
+		)}
+	/>
+</a>

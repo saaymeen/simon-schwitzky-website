@@ -1,0 +1,32 @@
+---
+import { LuArrowRight } from 'react-icons/lu';
+import { Anchor, RotatingCircleText } from '../astro';
+import { Image } from 'astro:assets';
+
+import image from 'assets/profile-placeholder.jpg';
+---
+
+<section style={{ transform: 'translate3d(0,0,0)' }} class="bg-white px-4 sm:px-12 pt-24 pb-16">
+	<div class="max-w-7xl mx-auto w-full flex flex-col md:grid md:grid-cols-2">
+		<div class="flex flex-col">
+			<span class="mb-1 text-neutral-600">Worryless Collaboration</span>
+			<h2 class="text-5xl mb-12">Always on time.<br />Always as promised.</h2>
+			<p class="max-w-md">
+				At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches.
+				Together let’s make a fruitful journey!
+			</p>
+			<Anchor icon={LuArrowRight} href="/contact" class="self-start mt-7" theme="primary" size="lg"
+				>Hire me</Anchor
+			>
+		</div>
+
+		<div class="flex flex-row justify-center relative mt-12 md:mt-0 md:ml-12">
+			<div class="h-72 md:h-full md:w-auto aspect-[9/16] relative">
+				<Image src={image} alt="" class="w-full h-full absolute object-cover" />
+				<div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+					<RotatingCircleText label="Open for new opportunities! - Hire me now! -" width={100} height={100} />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,19 @@
+---
+interface Props {
+	variant?: 'dark';
+}
+
+const { variant } = Astro.props;
+
+let url = '/logo/white-orange.svg';
+if (variant === 'dark') {
+	url = '/logo/dark-orange.svg';
+}
+
+import logo from 'assets/logo.svg';
+import { Image } from 'astro:assets';
+---
+
+{/*<a href="/">simonschwitzky</a>*/}
+
+<Image alt="" src={logo} class="w-6 h-6" />

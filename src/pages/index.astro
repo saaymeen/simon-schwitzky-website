@@ -1,0 +1,66 @@
+---
+import { PageLayout } from 'layouts';
+import { MastheadAnimations } from 'components/react/masthead-animations';
+import { Image } from 'astro:assets';
+import { LuArrowRight, LuChevronDown } from 'react-icons/lu';
+import { TestimonialSlider } from 'components/react/testimonial-slider';
+
+// https://webandcrafts.com
+// https://dribbble.com/shots/22711042-Photographer-Landing-Page
+// https://www.amernazir.com
+
+// blog https://www.dhiwise.com/post/The%20Role%20of%20React%20Three%20Fiber%20in%20the%20Evolution%20of%20User%20Interface%20Design
+
+// fix safari z-index bug https://stackoverflow.com/questions/50224855/not-respecting-z-index-on-safari-with-position-sticky
+const SECTION_STYLE = { transform: 'translate3d(0,0,0)' };
+
+//https://codepen.io/vcomics/pen/djqNrm
+
+import profileImage from 'assets/profile-placeholder.jpg'; // Image is 1600x900
+
+import {
+	AboutSection,
+	MastheadSection,
+	WorkSection,
+	TestimonialsSection,
+	HireMeSection,
+	EditorialSection,
+	ScheduleCallSection,
+} from '../components/sections';
+import { NewsletterSection } from '../components/sections';
+
+let renderMasthead = true;
+let renderAbout = true;
+let renderWork = true;
+let renderTestimonials = true;
+let renderNewsletter = false;
+let renderHireMe = true;
+let renderEditorial = true;
+let renderScheduleCall = true;
+
+if (import.meta.env.PROD) {
+	renderMasthead = true;
+	renderAbout = true;
+	renderWork = true;
+	renderTestimonials = true;
+	renderNewsletter = false;
+	renderHireMe = true;
+	renderEditorial = true;
+	renderScheduleCall = true;
+}
+
+// TODO: explain somewhere why I do not need a cookie disclaimer
+---
+
+<PageLayout title="Simon Schwitzky">
+	<main class="flex-1 flex flex-col">
+		{renderMasthead ? <MastheadSection /> : <div class="flex-1 pt-24" />}
+		{renderAbout && <AboutSection />}
+		{renderWork && <WorkSection />}
+		{renderTestimonials && <TestimonialsSection />}
+		{renderNewsletter && <NewsletterSection />}
+		{renderHireMe && <HireMeSection />}
+		{renderEditorial && <EditorialSection />}
+		{renderScheduleCall && <ScheduleCallSection />}
+	</main>
+</PageLayout>

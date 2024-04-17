@@ -1,0 +1,22 @@
+---
+import { MastheadAnimations } from 'components/react/masthead-animations';
+---
+
+<section
+	id="masthead"
+	style={{ transform: 'translate3d(0,0,0)' }}
+	class="min-h-screen bg-black flex flex-col top-0 sticky"
+>
+	<div class="px-4 md:px-16 py-16 flex flex-col flex-1">
+		<div class="w-full max-w-7xl mx-auto flex flex-col flex-1">
+			<div class="flex-1 mb-auto"></div>
+			<div class="z-[2] pointer-events-none">
+				<p class="text-white text-3xl mt-24">
+					Crafting digital experiences for<br />small and medium-sized enterprises.
+				</p>
+				<p class="text-white">Your partner for digital projects.</p>
+			</div>
+			<MastheadAnimations client:load />
+		</div>
+	</div>
+</section>

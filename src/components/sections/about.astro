@@ -1,0 +1,72 @@
+---
+import { LuArrowRight, LuChevronDown } from 'react-icons/lu';
+import { Anchor } from '../astro';
+
+import image from 'assets/service-1.jpg';
+import { Image } from 'astro:assets';
+
+const stats = [
+	{
+		title: (new Date().getFullYear() - 2015).toString() + ' Jahre',
+		tagline: 'Erfahrung im Tech-Sektor',
+	},
+	{
+		title: '22+ Projekte',
+		tagline: 'Erfolgreich abgeschlossen und veröffentlicht',
+	},
+	{
+		title: '19 Unternehmen',
+		tagline: 'Erfolgreich ins digitale Zeitalter geführt',
+	},
+];
+
+import img from 'assets/service-1.jpg';
+---
+
+<section style={{ transform: 'translate3d(0,0,0)' }} class="flex flex-col bg-white">
+	<div class="px-4 sm:px-12 pt-24 pb-16">
+		<div class="mx-auto w-full max-w-7xl flex flex-col">
+			<div class="flex justify-between">
+				<div class="flex flex-col">
+					<span class="mb-1 text-neutral-600">Hi, I am Simon 👋🏻</span>
+					<h2 class="text-5xl">Effortless collaboration<br />Engineer of your choice</h2>
+					<p class="max-w-md mt-7">
+						I care about the work I do and the people I do it with. That's why I show up ready everyday to
+						create amazing projects. I'm proud to have worked with really cool people, learning powerful
+						insights along the way & gain valuable experience.
+					</p>
+				</div>
+			</div>
+
+			<ul
+				class="grid grid-cols-1 grid-rows-3 sm:grid-cols-2 sm:grid-rows-2 md:grid-rows-1 md:grid-cols-3 mt-12 gap-y-7 gap-x-12"
+			>
+				{
+					stats.map((stat) => (
+						<li class="flex flex-col items-start">
+							<span class="text-3xl font-medium">{stat.title}</span>
+							<span class="text-neutral-600 text-sm mt-1">{stat.tagline}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>
+{
+	/*
+<section style={{ transform: 'translate3d(0,0,0)' }} class="relative flex flex-col bg-white px-4 md:px-12 pt-24 pb-16">
+	<div class="max-w-7xl mx-auto w-full flex">
+		<div class="flex flex-col">
+			<h2 class="text-5xl mb-12">Hi, I am Simon 👋🏻</h2>
+			<p>Based im Erzgebirge, currently in USA/CA with timezone</p>
+			<Anchor icon={LuChevronDown} size="lg" theme="primary" class="self-start mt-12">Learn about my work</Anchor>
+		</div>
+
+		<div class="flex-1 flex justify-end bg-red-300">
+			<div class="h-full aspect-square bg-blue-200"></div>
+		</div>
+	</div>
+</section>
+*/
+}

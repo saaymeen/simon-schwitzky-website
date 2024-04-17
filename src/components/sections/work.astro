@@ -1,0 +1,140 @@
+---
+import { Image } from 'astro:assets';
+import { Marquee, Anchor } from 'components/astro';
+
+import image from 'assets/service-1.jpg';
+import { LuArrowRight, LuArrowUpRight, LuChevronDown, LuShare, LuShare2 } from 'react-icons/lu';
+
+const projects = [
+	{
+		title: 'SelfieMate',
+		client: 'graessler.DIGITAL',
+		type: 'iOS App',
+		date: 'Oct 20, 2024',
+		image,
+	},
+	{
+		title: 'DT Connect',
+		client: 'druckluft-technik Chemnitz GmbH',
+		type: 'Full-Stack',
+		date: 'Oct 20, 2024',
+		image,
+	},
+	{
+		title: 'Skymergency',
+		client: 'graessler.DIGITAL',
+		type: 'iOS & Android App',
+		date: 'Oct 20, 2024',
+		image,
+	},
+];
+
+const openSourceProjects = [
+	{
+		title: 'react-native-airdrop-only',
+	},
+	{
+		title: 'react-native-airdrop-only',
+	},
+];
+
+const stats = [
+	{
+		title: (new Date().getFullYear() - 2015).toString() + ' Jahre',
+		tagline: 'Erfahrung im Tech-Sektor',
+	},
+	{
+		title: '7 Years',
+		tagline: 'as a Finance Advisor at Robobank',
+	},
+	{
+		title: '7 Years',
+		tagline: 'as a Finance Advisor at Robobank',
+	},
+];
+---
+
+<section style={{ transform: 'translate3d(0,0,0)' }} class="flex flex-col bg-white">
+	<div class="px-4 sm:px-12 bg-neutral-100 pt-24 pb-16">
+		<div class="mx-auto w-full max-w-7xl flex flex-col">
+			<span class="text-3xl sm:text-5xl max-w-5xl font-medium leading-none text-neutral-800">
+				<span class="text-black font-bold">Photography</span> is driven by a deep passion for <span
+					class="text-black font-bold">capturing life's</span
+				> most <span class="text-black font-bold">precious moments</span> with artistry and a touch of magic.
+			</span>
+		</div>
+	</div>
+
+	<Marquee class="bg-black text-white py-7">
+		Apps • Webanwendungen • E-Commerce • Webseiten • Messebau • IoT • PCB Design •
+	</Marquee>
+	<div class="px-4 sm:px-12 pt-24 pb-16">
+		<div class="mx-auto w-full max-w-7xl flex flex-col">
+			<div class="flex justify-between">
+				<div class="flex flex-col max-w-md">
+					<span class="mb-1 text-neutral-600">Previous Work</span>
+					<h2 class="text-5xl">Get inspired<br />by my recent journeys</h2>
+
+					<p class="mt-12">
+						I care about the work I do and the people I do it with. That's why I show up ready everyday to
+						create amazing projects. I'm proud to have worked with really cool people, learning powerful
+						insights along the way & gain valuable experience. <a
+							class="cursor-pointer hover:underline text-blue-600 hover:text-blue-500 transition-colors duration-75"
+							>Learn more</a
+						> about my process and what tools I use.
+					</p>
+				</div>
+				<div class="flex-1 flex"></div>
+			</div>
+
+			<ul class="flex flex-col">
+				{
+					projects.map((project) => (
+						<li class="flex mt-8 bg-neutral-100 rounded-sm overflow-hidden">
+							<a class="flex-1 flex group transition-colors overflow-hidden cursor-pointer duration-150">
+								<figure class="flex flex-1 flex-col-reverse sm:flex-row">
+									<figcaption class="flex-1 flex flex-col justify-center p-4">
+										<div class="flex items-center justify-between">
+											<span class="text-xl sm:text-3xl font-medium">{project.title}</span>
+											<span class="sm:hidden flex items-center text-xs text-blue-600">
+												<span>Ansehen</span>
+												<LuArrowRight size={11} className="ml-1" />
+											</span>
+										</div>
+										<div class="flex items-center mt-1 text-sm sm:text-base">
+											<span>{project.client}</span>
+											<span class="rounded-md self-stretch my-1 mx-1 w-px bg-neutral-600" />
+											<span>{project.type}</span>
+										</div>
+									</figcaption>
+									<div class="sm:h-28 md:h-36 aspect-[2] sm:rounded-sm relative overflow-hidden">
+										<Image
+											src={image}
+											alt=""
+											class="absolute group-hover:scale-[1.05] transition duration-150 h-full w-full object-cover"
+										/>
+									</div>
+								</figure>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+
+			<Anchor icon={LuArrowRight} href="/" class="self-start mt-12" size="lg" theme="primary"
+				>View all projects</Anchor
+			>
+			<span class="mb-1 text-neutral-600 mt-12 inline-block sm:items-center">
+				{
+					/*<span class="mt-1 sm:mt-0"> or check out my contributions to the Open-Source ecosystem below</span>*/
+				}
+				<span class="mt-1 sm:mt-0 inline-block">
+					or check out my contributions to the Open-Source ecosystem on my
+				</span><a
+					class="text-blue-600 cursor-pointer transition-colors hover:text-blue-500 hover:underline inline-flex items-center"
+					><span>GitHub Profile</span><LuArrowUpRight className="ml-1" /></a
+				>
+			</span>
+		</div>
+	</div>
+</section>
