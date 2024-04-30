@@ -1,0 +1,43 @@
+---
+import { LuArrowUpRight } from 'react-icons/lu/index.js';
+
+interface Props {
+	time: string;
+	role: string;
+	org: string;
+	href: string;
+	tools: string[];
+	links?: { label: string; href: string }[];
+}
+
+const { time, role, org, href, tools } = Astro.props;
+---
+
+<li class="flex list-none flex-col gap-x-12 sm:grid sm:grid-cols-4">
+	<span class="mb-1 text-xs font-medium text-neutral-600 sm:col-span-1 sm:mt-1">{time}</span>
+	<div class="flex flex-col sm:col-span-3">
+		<a
+			target="_blank"
+			rel="noopener noreferrer"
+			href={href}
+			class="group flex items-center self-start font-medium transition-colors hover:text-blue-600"
+		>
+			<h4>{role} · {org}</h4>
+			<LuArrowUpRight
+				className="ml-1 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+			/>
+		</a>
+		<p class="mt-3 text-sm">
+			<slot />
+		</p>
+		<ul class="mt-3 flex flex-wrap space-x-1">
+			{
+				tools.map((tool) => (
+					<li>
+						<span class="rounded-md bg-blue-100 px-3 py-1 text-xs text-blue-600">{tool}</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</li>

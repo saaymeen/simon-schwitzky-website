@@ -12,6 +12,7 @@ export default {
 		},
 		extend: {
 			sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
+			serif: ['"Noticia Text"', ...defaultTheme.fontFamily.serif],
 		},
 	},
 	plugins: [tailwindForms],

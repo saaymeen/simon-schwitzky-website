@@ -1,0 +1,52 @@
+---
+import '@fontsource/kanit/400.css';
+
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+
+import '@fontsource/noticia-text/400.css';
+import '@fontsource/noticia-text/700.css';
+
+import { Footer } from 'components/page';
+
+import clsx from 'clsx';
+
+interface Props {
+	title: string;
+	className?: string;
+}
+
+const { title, className = 'bg-black' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="de" class={clsx('flex min-h-screen flex-col scroll-smooth', className)}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2563eb" />
+		<meta name="msapplication-TileColor" content="#212121" />
+		<meta name="theme-color" content="#212121" />
+
+		<title>{title}</title>
+
+		<script
+			is:inline
+			data-goatcounter="https://simonschwitzky.goatcounter.com/count"
+			async
+			src="//gc.zgo.at/count.js"></script>
+	</head>
+
+	<body class="flex flex-1 flex-col">
+		<slot />
+		<Footer />
+	</body>
+</html>

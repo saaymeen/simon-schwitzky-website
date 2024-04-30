@@ -15,7 +15,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props: TextInput
 
 	return (
 		<label className={clsx('flex flex-col', className)} htmlFor={name}>
-			<span className="block mb-1 text-sm font-heading">
+			<span className="font-heading mb-1 block text-sm">
 				<span>{label}</span>
 				<span className={clsx(required === false && 'hidden', 'text-primary')}>*</span>
 			</span>
@@ -24,7 +24,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props: TextInput
 				aria-required={required}
 				type={type}
 				name={name}
-				className="bg-neutral-800 rounded-sm px-3 py-2 text-sm text-neutral-200 border-none focus:ring-1 focus:ring-primary"
+				className="focus:ring-primary rounded-sm border border-gray-800 bg-white px-3 py-2 text-sm focus:ring-1"
 				{...rest}
 			/>
 			<ErrorMessage error={error} />

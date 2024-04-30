@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { type IconType } from 'react-icons/lib';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -22,18 +22,18 @@ function Button(props: ButtonProps): ReactNode {
 		...rest
 	} = props;
 
-	const disabledButton = loading || disabled;
+	// const disabledButton = loading || disabled;
 
 	return (
 		<button
 			className={clsx(
-				'flex items-center transition-colors rounded-sm group cursor-pointer',
-				size === 'base' && 'text-xs py-2 pl-3',
-				size === 'lg' && 'text-base py-3 pl-5',
+				'group flex cursor-pointer items-center rounded-sm transition-colors',
+				size === 'base' && 'py-2 pl-3 text-xs',
+				size === 'lg' && 'py-3 pl-5 text-base',
 				size === 'lg' && (typeof Icon === 'undefined' ? 'pr-5' : 'pr-3'),
 				size === 'base' && (typeof Icon === 'undefined' ? 'pr-3' : 'pr-1'),
-				theme === 'secondary' && 'bg-neutral-800 hover:bg-neutral-700 text-white',
-				theme === 'primary' && 'border-blue-500 bg-blue-600 hover:bg-blue-500 hover:border-blue-400 text-white',
+				theme === 'secondary' && 'bg-neutral-800 text-white hover:bg-neutral-700',
+				theme === 'primary' && 'border-blue-500 bg-blue-600 text-white hover:border-blue-400 hover:bg-blue-500',
 
 				className,
 			)}
@@ -51,7 +51,7 @@ function Button(props: ButtonProps): ReactNode {
 					>
 						<svg
 							aria-hidden="true"
-							className="w-3 h-3 text-neutral-800 animate-spin fill-white mr-2"
+							className="mr-2 h-3 w-3 animate-spin fill-white text-neutral-800"
 							viewBox="0 0 100 100"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -75,8 +75,8 @@ function Button(props: ButtonProps): ReactNode {
 					size={clsx(size === 'base' && 12, size === 'lg' && 16)}
 					className={clsx(
 						'block transition-all',
-						size === 'base' && 'mr-1 ml-1 group-hover:ml-2 group-hover:mr-0',
-						size === 'lg' && 'mr-2 ml-2 group-hover:ml-3 group-hover:mr-1',
+						size === 'base' && 'ml-1 mr-1 group-hover:ml-2 group-hover:mr-0',
+						size === 'lg' && 'ml-2 mr-2 group-hover:ml-3 group-hover:mr-1',
 					)}
 				/>
 			)}

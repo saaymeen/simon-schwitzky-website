@@ -1,0 +1,28 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import clsx from 'clsx';
+
+interface Props extends astroHTML.JSX.LiHTMLAttributes {
+	title: string;
+	description: string;
+	image: { src: ImageMetadata; alt: string };
+}
+
+const { title, description, image, class: className, ...rest } = Astro.props;
+---
+
+<li class={clsx('flex relative group rounded-sm overflow-hidden cursor-pointer', className)} {...rest}>
+	<div class="z-20 flex flex-col justify-between p-4 text-white">
+		<span>{title}</span>
+		<p class="text-gray-200">{description}</p>
+	</div>
+	<div class="absolute h-full w-full">
+		<div class="absolute z-10 h-full w-full bg-black/70"></div>
+		<Image
+			src={image.src}
+			alt={image.alt}
+			class="absolute h-full w-full object-cover transition-all duration-300 group-hover:scale-[1.1]"
+		/>
+	</div>
+</li>

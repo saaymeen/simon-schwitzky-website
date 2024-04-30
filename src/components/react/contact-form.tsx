@@ -20,8 +20,6 @@ const schema = z.object({
 type FormInput = z.input<typeof schema>;
 type FormOutput = z.output<typeof schema>;
 
-const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
 	const { className, ...rest } = props;
 
@@ -75,12 +73,12 @@ function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
 	return (
 		<form
 			ref={form}
-			className={clsx('flex flex-col space-y-3 max-w-3xl', className)}
+			className={clsx('flex max-w-3xl flex-col space-y-3 rounded-sm transition-[padding]', className)}
 			onSubmit={handleSubmit(handleFormSubmit)}
 			{...rest}
 		>
 			<TextInput error={errors.name} placeholder="Max Mustermann" {...register('name')} label="Name" required />
-			<div className="flex md:space-x-4 space-y-3 md:space-y-0 flex-col md:flex-row">
+			<div className="flex flex-col space-y-3 md:flex-row md:space-x-4 md:space-y-0">
 				<TextInput
 					error={errors.email}
 					placeholder="max@musterfamilie.de"
@@ -108,14 +106,14 @@ function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
 				required
 			/>
 
-			<div className="flex flex-row justify-end md:justify-start">
+			<div className="flex flex-row justify-end">
 				<Turnstile siteKey="0x4AAAAAAAXCfPpX1bgGQOfG" />
 			</div>
 
-			{successMessage.length > 0 && <p className="text-green-500 my-4 text-sm">{successMessage}</p>}
-			{errorMessage.length > 0 && <p className="text-red-500 my-4 text-sm">{errorMessage}</p>}
+			{successMessage.length > 0 && <p className="my-4 text-sm text-green-500">{successMessage}</p>}
+			{errorMessage.length > 0 && <p className="my-4 text-sm text-red-500">{errorMessage}</p>}
 
-			<Button loading={isSubmitting} type="submit" className="self-end md:self-start" size="lg">
+			<Button loading={isSubmitting} type="submit" className="self-end" size="lg" theme="primary">
 				Nachricht senden
 			</Button>
 		</form>

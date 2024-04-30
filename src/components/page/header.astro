@@ -1,42 +1,43 @@
 ---
 import { Anchor } from '../astro';
-import Logo from './logo.astro';
-import { LuArrowRight } from 'react-icons/lu';
+import { LuArrowRight } from 'react-icons/lu/index.js';
 ---
 
-<header class="fixed w-full top-0 bg-black text-black px-4 sm:px-12 py-5 flex z-20">
-	<div class="flex max-w-7xl flex-1 items-center mx-auto">
-		<div class="flex-1 mr-auto flex text-white">
-			<Logo />
-		</div>
+{/*<header class="fixed top-0 z-20 flex w-full bg-black px-4 py-5 text-black sm:px-12">*/}
+<header class="sticky top-0 z-20 flex w-full px-4 py-5 text-black sm:px-12">
+	<div class="mx-auto flex max-w-7xl flex-1 items-center">
+		<span class="mr-auto flex flex-1 text-sm text-white">Simon Schwitzky</span>
 
-		<nav class="hidden sm:flex items-center text-white">
-			<ul class="flex space-x-5 text-xs items-center">
+		<nav class="hidden items-center text-white sm:flex">
+			<ul class="flex items-center space-x-5 text-xs">
 				<li>
-					<a class="text-neutral-200 hover:text-white hover:underline block transition-colors cursor-pointer">
+					<a class="block cursor-pointer text-neutral-200 transition-colors hover:text-white hover:underline">
 						About
 					</a>
 				</li>
 				<li>
-					<a class="text-neutral-200 hover:text-white hover:underline block transition-colors cursor-pointer">
-						Works
+					<a class="block cursor-pointer text-neutral-200 transition-colors hover:text-white hover:underline">
+						Work
 					</a>
 				</li>
 				<li>
-					<a class="text-neutral-200 hover:text-white hover:underline block transition-colors cursor-pointer">
+					<a class="block cursor-pointer text-neutral-200 transition-colors hover:text-white hover:underline">
 						Editorial
 					</a>
 				</li>
 			</ul>
 		</nav>
 
-		<div class="flex-1 ml-auto flex justify-end">
+		<div class="ml-auto flex flex-1 justify-end">
 			<Anchor icon={LuArrowRight} href="/contact"> Kennenlernen </Anchor>
 		</div>
 	</div>
 </header>
 
 <script>
+	/*
+	TODO: make this only query id #indexHeader as it will otherwise effect all headers on page elements
+
 	const header = document.querySelector('header');
 	const masthead = document.querySelector('#masthead');
 
@@ -78,4 +79,5 @@ import { LuArrowRight } from 'react-icons/lu';
 			}
 		}
 	});
+	*/
 </script>

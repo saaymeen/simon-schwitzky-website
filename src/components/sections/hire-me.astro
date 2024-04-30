@@ -1,28 +1,51 @@
 ---
-import { LuArrowRight } from 'react-icons/lu';
-import { Anchor, RotatingCircleText } from '../astro';
+import { RotatingCircleText } from '../astro';
 import { Image } from 'astro:assets';
 
 import image from 'assets/profile-placeholder.jpg';
+
+const stats = [
+	{
+		title: (new Date().getFullYear() - 2015).toString() + ' Jahre',
+		tagline: 'Erfahrung im Tech-Sektor',
+	},
+	{
+		title: '22+ Projekte',
+		tagline: 'Erfolgreich abgeschlossen und veröffentlicht',
+	},
+	{
+		title: '19 Unternehmen',
+		tagline: 'Erfolgreich ins digitale Zeitalter geführt',
+	},
+];
 ---
 
-<section style={{ transform: 'translate3d(0,0,0)' }} class="bg-white px-4 sm:px-12 pt-24 pb-16">
-	<div class="max-w-7xl mx-auto w-full flex flex-col md:grid md:grid-cols-2">
+<section style={{ transform: 'translate3d(0,0,0)' }} class="bg-white px-4 pb-16 pt-24 sm:px-12">
+	<div class="mx-auto flex w-full max-w-7xl flex-col md:grid md:grid-cols-2">
 		<div class="flex flex-col">
 			<span class="mb-1 text-neutral-600">Worryless Collaboration</span>
-			<h2 class="text-5xl mb-12">Always on time.<br />Always as promised.</h2>
+			<h2 class="mb-12 text-5xl">Always on time.<br />Always as promised.</h2>
 			<p class="max-w-md">
 				At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches.
 				Together let’s make a fruitful journey!
 			</p>
-			<Anchor icon={LuArrowRight} href="/contact" class="self-start mt-7" theme="primary" size="lg"
-				>Hire me</Anchor
+			<ul
+				class="mt-12 grid grid-cols-1 grid-rows-3 gap-x-12 gap-y-7 sm:grid-cols-2 sm:grid-rows-2 md:grid-cols-3 md:grid-rows-1"
 			>
+				{
+					stats.map((stat) => (
+						<li class="flex flex-col items-start">
+							<span class="whitespace-nowrap text-3xl font-medium">{stat.title}</span>
+							<span class="mt-1 text-sm text-neutral-600">{stat.tagline}</span>
+						</li>
+					))
+				}
+			</ul>
 		</div>
 
-		<div class="flex flex-row justify-center relative mt-12 md:mt-0 md:ml-12">
-			<div class="h-72 md:h-full md:w-auto aspect-[9/16] relative">
-				<Image src={image} alt="" class="w-full h-full absolute object-cover" />
+		<div class="relative mt-12 flex flex-row justify-center md:ml-12 md:mt-0">
+			<div class="relative aspect-[9/16] h-72 md:h-full md:w-auto">
+				<Image src={image} alt="" class="absolute h-full w-full object-cover" />
 				<div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
 					<RotatingCircleText label="Open for new opportunities! - Hire me now! -" width={100} height={100} />
 				</div>

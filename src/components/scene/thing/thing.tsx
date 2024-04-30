@@ -1,5 +1,5 @@
-import { OrbitControls, useFBO } from '@react-three/drei';
-import { Canvas, useFrame, extend, createPortal } from '@react-three/fiber';
+import { useFBO } from '@react-three/drei';
+import { useFrame, extend, createPortal, ReactThreeFiber } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -11,11 +11,19 @@ import { useSpring, animated } from '@react-spring/three';
 
 extend({ SimulationMaterial: SimulationMaterial });
 
+declare global {
+	namespace JSX {
+		interface IntrinsicElements {
+			simulationMaterial: ReactThreeFiber.Object3DNode<THREE.ShaderMaterial, typeof THREE.ShaderMaterial>;
+		}
+	}
+}
+
 const FBOParticles = () => {
 	const size = 128;
 
-	const points = useRef();
-	const simulationMaterialRef = useRef();
+	const points = useRef<THREE.Points>(null);
+	const simulationMaterialRef = useRef<THREE.ShaderMaterial>(null);
 
 	const scene = new THREE.Scene();
 	const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1);
@@ -58,16 +66,20 @@ const FBOParticles = () => {
 		gl.render(scene, camera);
 		gl.setRenderTarget(null);
 
-		points.current.material.uniforms.uPositions.value = renderTarget.texture;
+		if (points.current !== null) {
+			(points.current.material as THREE.ShaderMaterial).uniforms.uPositions.value = renderTarget.texture;
+		}
 
-		simulationMaterialRef.current.uniforms.uTime.value = clock.elapsedTime;
+		if (simulationMaterialRef.current !== null) {
+			simulationMaterialRef.current.uniforms.uTime.value = clock.elapsedTime;
+		}
 	});
 
 	return (
 		<>
 			{createPortal(
 				<mesh>
-					<simulationMaterial ref={simulationMaterialRef} args={[size]} />
+					<simulationMaterial ref={simulationMaterialRef} args={[size as THREE.ShaderMaterialParameters]} />
 					<bufferGeometry>
 						<bufferAttribute
 							attach="attributes-position"

@@ -1,14 +1,14 @@
-import { OrbitControls, useFBO, Float } from '@react-three/drei';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { useFBO } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { nanoid } from 'nanoid';
-import { a, useTransition, useSpring, animated, Transition } from '@react-spring/three';
+import { useSpring, animated } from '@react-spring/three';
 
 import vertexShader from './vertex.glsl';
 import fragmentShader from './fragment.glsl';
 
-function lerp(v0, v1, t) {
+function lerp(v0: number, v1: number, t: number) {
 	return v0 * (1 - t) + v1 * t;
 }
 
@@ -74,7 +74,7 @@ const Glass = () => {
 
 	const mp = useRef({ x: 0, y: 0 });
 	useEffect(() => {
-		const updateMousePosition = (ev) => {
+		const updateMousePosition = (ev: MouseEvent) => {
 			mp.current = { x: ev.clientX, y: ev.clientY };
 		};
 
@@ -86,37 +86,45 @@ const Glass = () => {
 
 	useFrame((state, delta) => {
 		const { gl, scene, camera } = state;
+		if (mesh.current === null) {
+			return;
+		}
+
 		mesh.current.visible = false;
 
-		mesh.current.material.uniforms.uDiffuseness.value = diffuseness;
-		mesh.current.material.uniforms.uShininess.value = shininess;
-		mesh.current.material.uniforms.uLight.value = new THREE.Vector3(light.x, light.y, light.z);
-		mesh.current.material.uniforms.uFresnelPower.value = fresnelPower;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uDiffuseness.value = diffuseness;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uShininess.value = shininess;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uLight.value = new THREE.Vector3(
+			light.x,
+			light.y,
+			light.z,
+		);
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uFresnelPower.value = fresnelPower;
 
-		mesh.current.material.uniforms.uIorR.value = iorR;
-		mesh.current.material.uniforms.uIorY.value = iorY;
-		mesh.current.material.uniforms.uIorG.value = iorG;
-		mesh.current.material.uniforms.uIorC.value = iorC;
-		mesh.current.material.uniforms.uIorB.value = iorB;
-		mesh.current.material.uniforms.uIorP.value = iorP;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uIorR.value = iorR;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uIorY.value = iorY;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uIorG.value = iorG;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uIorC.value = iorC;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uIorB.value = iorB;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uIorP.value = iorP;
 
-		mesh.current.material.uniforms.uSaturation.value = saturation;
-		mesh.current.material.uniforms.uChromaticAberration.value = chromaticAberration;
-		mesh.current.material.uniforms.uRefractPower.value = refraction;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uSaturation.value = saturation;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uChromaticAberration.value = chromaticAberration;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uRefractPower.value = refraction;
 
 		gl.setRenderTarget(backRenderTarget);
 		gl.render(scene, camera);
 
-		mesh.current.material.uniforms.uTexture.value = backRenderTarget.texture;
-		mesh.current.material.side = THREE.BackSide;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uTexture.value = backRenderTarget.texture;
+		(mesh.current.material as THREE.ShaderMaterial).side = THREE.BackSide;
 
 		mesh.current.visible = true;
 
 		gl.setRenderTarget(mainRenderTarget);
 		gl.render(scene, camera);
 
-		mesh.current.material.uniforms.uTexture.value = mainRenderTarget.texture;
-		mesh.current.material.side = THREE.FrontSide;
+		(mesh.current.material as THREE.ShaderMaterial).uniforms.uTexture.value = mainRenderTarget.texture;
+		(mesh.current.material as THREE.ShaderMaterial).side = THREE.FrontSide;
 
 		gl.setRenderTarget(null);
 
@@ -159,12 +167,12 @@ const Glass = () => {
 		trail: 100,
 	});*/
 
-	const { scale } = useSpring({
-		scale: 20,
-		from: { scale: 0 },
-		// config: { friction: 50 },
-		loop: true,
-	});
+	//const { scale } = useSpring({
+	//	scale: 20,
+	//	from: { scale: 0 },
+	//	// config: { friction: 50 },
+	//	loop: true,
+	//});
 
 	return (
 		<group>

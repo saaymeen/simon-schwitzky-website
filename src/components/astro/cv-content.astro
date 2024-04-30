@@ -1,0 +1,19 @@
+---
+import clsx from 'clsx';
+
+interface Props {}
+
+interface Props {
+	className?: string;
+	wrapperClassName?: string;
+	as?: keyof JSX.IntrinsicElements;
+}
+
+const { className, as: Wrapper = 'div', wrapperClassName } = Astro.props;
+---
+
+<div class={clsx('px-4 sm:px-12 lg:px-0 transition-[padding]', className)}>
+	<Wrapper class={clsx('mx-auto flex w-full max-w-7xl flex-col', wrapperClassName)}>
+		<slot />
+	</Wrapper>
+</div>

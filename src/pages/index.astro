@@ -1,9 +1,5 @@
 ---
-import { PageLayout } from 'layouts';
-import { MastheadAnimations } from 'components/react/masthead-animations';
-import { Image } from 'astro:assets';
-import { LuArrowRight, LuChevronDown } from 'react-icons/lu';
-import { TestimonialSlider } from 'components/react/testimonial-slider';
+import { BaseLayout } from 'layouts';
 
 // https://webandcrafts.com
 // https://dribbble.com/shots/22711042-Photographer-Landing-Page
@@ -12,11 +8,8 @@ import { TestimonialSlider } from 'components/react/testimonial-slider';
 // blog https://www.dhiwise.com/post/The%20Role%20of%20React%20Three%20Fiber%20in%20the%20Evolution%20of%20User%20Interface%20Design
 
 // fix safari z-index bug https://stackoverflow.com/questions/50224855/not-respecting-z-index-on-safari-with-position-sticky
-const SECTION_STYLE = { transform: 'translate3d(0,0,0)' };
 
 //https://codepen.io/vcomics/pen/djqNrm
-
-import profileImage from 'assets/profile-placeholder.jpg'; // Image is 1600x900
 
 import {
 	AboutSection,
@@ -29,14 +22,25 @@ import {
 } from '../components/sections';
 import { NewsletterSection } from '../components/sections';
 
-let renderMasthead = true;
-let renderAbout = true;
+let renderMasthead = false;
+let renderAbout = false;
 let renderWork = true;
-let renderTestimonials = true;
+let renderTestimonials = false;
 let renderNewsletter = false;
-let renderHireMe = true;
-let renderEditorial = true;
-let renderScheduleCall = true;
+let renderHireMe = false;
+let renderEditorial = false;
+let renderScheduleCall = false;
+
+if (true) {
+	renderMasthead = true;
+	renderAbout = true;
+	renderWork = true;
+	renderTestimonials = true;
+	renderNewsletter = false;
+	renderHireMe = true;
+	renderEditorial = true;
+	renderScheduleCall = true;
+}
 
 if (import.meta.env.PROD) {
 	renderMasthead = true;
@@ -52,8 +56,8 @@ if (import.meta.env.PROD) {
 // TODO: explain somewhere why I do not need a cookie disclaimer
 ---
 
-<PageLayout title="Simon Schwitzky">
-	<main class="flex-1 flex flex-col">
+<BaseLayout title="Simon Schwitzky">
+	<main class="flex flex-1 flex-col">
 		{renderMasthead ? <MastheadSection /> : <div class="flex-1 pt-24" />}
 		{renderAbout && <AboutSection />}
 		{renderWork && <WorkSection />}
@@ -63,4 +67,4 @@ if (import.meta.env.PROD) {
 		{renderEditorial && <EditorialSection />}
 		{renderScheduleCall && <ScheduleCallSection />}
 	</main>
-</PageLayout>
+</BaseLayout>

@@ -1,0 +1,62 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { LuArrowUpRight, LuLink } from 'react-icons/lu/index.js';
+
+interface Props {
+	title: string;
+	href: string;
+	image: { src: ImageMetadata; alt: string };
+	tools?: string[];
+	links?: { label: string; href: string }[];
+}
+
+const { title, href, image, tools = [], links = [] } = Astro.props;
+---
+
+<li>
+	<article class="flex flex-col overflow-hidden rounded-sm bg-gray-100 xs:grid xs:grid-cols-4">
+		<div class="col-span-3 p-3">
+			<a href={href} class="group flex items-center self-start font-medium transition-colors hover:text-blue-600">
+				<h4>{title}</h4>
+				<LuArrowUpRight
+					className="ml-1 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+				/>
+			</a>
+			<p class="mt-3 text-sm">
+				<slot />
+			</p>
+			<ul class="mt-3 flex flex-wrap space-x-3">
+				{
+					links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								class="flex items-center space-x-1 text-xs font-medium text-neutral-700 transition-colors hover:text-blue-600"
+							>
+								<LuLink />
+								<span>{link.label}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+			<ul class="mt-3 flex flex-wrap space-x-1">
+				{
+					tools.map((tool) => (
+						<li>
+							<span class="rounded-md bg-blue-100 px-3 py-1 text-xs text-blue-600">{tool}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+		<div class="w-full xs:-order-1">
+			<Image
+				src={image.src}
+				alt={image.alt}
+				class="aspect-[21/9] w-full bg-red-100 object-cover xs:aspect-auto xs:h-full"
+			/>
+		</div>
+	</article>
+</li>

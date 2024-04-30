@@ -1,10 +1,7 @@
-import { useState, type ReactNode, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Particles } from '../scene/gpgpu-curl-noise/particles';
+import { useState, type ReactNode } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { Root as FBOParticles } from '../scene/thing/thing';
 import { Root as Glass } from '../scene/glass/glass';
-import { OrbitControls } from '@react-three/drei';
-import { AnimatePresence, motion } from 'framer-motion';
 import clsx from 'clsx';
 
 function MastheadAnimations(): ReactNode {
@@ -14,28 +11,28 @@ function MastheadAnimations(): ReactNode {
 
 	return (
 		<>
-			<div className="flex flex-1 mt-auto items-end justify-end text-white z-[2]">
+			<div className="z-[2] mt-auto flex flex-1 items-end justify-end text-white">
 				<button
 					onClick={handleChangeAnimationPress}
-					className="flex flex-row items-stretch rounded-sm overflow-hidden bg-black/30"
+					className="flex flex-row items-stretch overflow-hidden rounded-sm bg-black/30"
 				>
-					<ul className="w-16 h-16 bg-neutral-500 rounded-sm">
+					<ul className="h-16 w-16 rounded-sm bg-neutral-500">
 						<li />
 						<li />
 					</ul>
-					<div className="flex flex-col ml-3 pr-3 py-1 items-start">
-						<span className="block text-neutral-200 text-xs">Next</span>
+					<div className="ml-3 flex flex-col items-start py-1 pr-3">
+						<span className="block text-xs text-neutral-200">Next</span>
 						<span className="block text-white">{selectedIndex === 0 ? 'Prism' : 'Particles'}</span>
-						<ul className="mt-auto flex space-x-3 w-32">
+						<ul className="mt-auto flex w-32 space-x-3">
 							<li
 								className={clsx(
-									'flex-1 h-[2px] rounded-full transition-colors',
+									'h-[2px] flex-1 rounded-full transition-colors',
 									selectedIndex === 0 ? 'bg-white' : 'bg-neutral-400',
 								)}
 							/>
 							<li
 								className={clsx(
-									'flex-1 h-[2px] rounded-full transition-colors',
+									'h-[2px] flex-1 rounded-full transition-colors',
 									selectedIndex === 1 ? 'bg-white' : 'bg-neutral-400',
 								)}
 							/>
@@ -44,7 +41,7 @@ function MastheadAnimations(): ReactNode {
 				</button>
 			</div>
 
-			<div className="absolute inset-0 flex justify-center items-center z-[1]">
+			<div className="absolute inset-0 z-[1] flex items-center justify-center">
 				<Canvas camera={{ position: [4, -2, 7] }} dpr={[1, 2]}>
 					{selectedIndex === 0 && <FBOParticles />}
 					{selectedIndex === 1 && <Glass />}

@@ -1,25 +1,39 @@
 ---
-import { LuArrowRight, LuPhoneCall } from 'react-icons/lu';
+import { LuArrowRight } from 'react-icons/lu/index.js';
 import { Anchor } from '../astro';
-import { ContactForm } from '../react';
 ---
 
 <section
 	style={{ transform: 'translate3d(0,0,0)' }}
-	class="flex flex-col text-white px-4 sm:px-12 bg-black pt-24 pb-16"
+	class="flex flex-col bg-black px-4 pb-16 pt-24 text-white sm:px-12"
 >
-	<div class="max-w-7xl w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center">
+	<div class="mx-auto flex w-full max-w-7xl flex-col items-start justify-between sm:flex-row sm:items-center">
 		<div>
-			<h2 class="text-3xl sm:text-5xl font-medium">Lets connect!</h2>
+			<h2 class="text-3xl font-medium sm:text-5xl">Lets connect!</h2>
 			<p class="mt-1">Setting up a call takes less than a minute of your time.</p>
 		</div>
 
-		<Anchor size="lg" theme="primary" icon={LuArrowRight} href="Schedule a call" class="mt-3 sm:mt-0">
+		<Anchor
+			href="/contact"
+			size="lg"
+			theme="primary"
+			icon={LuArrowRight}
+			href="Schedule a call"
+			class="mt-3 sm:mt-0"
+		>
 			Schedule call</Anchor
 		>
 	</div>
-	<div class="max-w-7xl w-full mx-auto flex flex-col">
-		<span class="my-7 text-neutral-200">or leave a message below and I will get back to you within 24 hours.</span>
-		<ContactForm client:load className="flex-1" />
+	<div class="mx-auto mt-5 flex w-full max-w-7xl flex-col">
+		<p class="">
+			Or <a class="text-blue-400 hover:underline" href="/contact">{' '}leave a message{' '}</a> and I will get back
+			to you within 24 hours.
+		</p>
 	</div>
 </section>
+{
+	/*<div class="max-w-7xl w-full mx-auto flex flex-col">
+		<span class="my-7 text-neutral-200">or leave a message below and I will get back to you within 24 hours.</span>
+		<ContactForm client:load className="flex-1" />
+	</div>*/
+}
