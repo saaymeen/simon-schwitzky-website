@@ -15,8 +15,8 @@ const { title, href, image, tools = [], links = [] } = Astro.props;
 ---
 
 <li>
-	<article class="flex flex-col overflow-hidden rounded-sm bg-gray-100 xs:grid xs:grid-cols-4">
-		<div class="col-span-3 p-3">
+	<article class="flex flex-col overflow-hidden rounded-sm xs:grid xs:grid-cols-4">
+		<div class="col-span-3 flex flex-col px-4">
 			<a href={href} class="group flex items-center self-start font-medium transition-colors hover:text-blue-600">
 				<h4>{title}</h4>
 				<LuArrowUpRight
@@ -52,11 +52,7 @@ const { title, href, image, tools = [], links = [] } = Astro.props;
 			</ul>
 		</div>
 		<div class="w-full xs:-order-1">
-			<Image
-				src={image.src}
-				alt={image.alt}
-				class="aspect-[21/9] w-full bg-red-100 object-cover xs:aspect-auto xs:h-full"
-			/>
+			<Image src={image.src} alt={image.alt} class="aspect-[21/9] w-full object-cover xs:aspect-auto xs:h-full" />
 		</div>
 	</article>
 </li>

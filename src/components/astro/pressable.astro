@@ -1,0 +1,32 @@
+---
+import clsx from 'clsx';
+import { type PressableProps } from 'types/pressable';
+
+type Props = PressableProps & astroHTML.JSX.HTMLAttributes;
+
+const { icon: Icon, size = 'base', class: className, theme = 'secondary', ...rest } = Astro.props;
+---
+
+<div
+	class={clsx(
+		'flex items-center justify-center transition-colors rounded-sm group cursor-pointer',
+		size === 'base' && 'text-xs py-2 pl-3 pr-2',
+		size === 'lg' && 'text-base py-3 pl-5 pr-3',
+		theme === 'secondary' && 'bg-neutral-800 hover:bg-neutral-700 text-white',
+		theme === 'primary' && 'border-blue-500 bg-blue-600 text-white',
+		className,
+	)}
+	{...rest}
+>
+	<span class="block">
+		<slot />
+	</span>
+	<Icon
+		size={clsx(size === 'base' && 12, size === 'lg' && 16)}
+		className={clsx(
+			'block transition-all',
+			size === 'base' && 'ml-1 mr-1 group-hover:ml-2 group-hover:mr-0',
+			size === 'lg' && 'ml-2 mr-2 group-hover:ml-3 group-hover:mr-1',
+		)}
+	/>
+</div>

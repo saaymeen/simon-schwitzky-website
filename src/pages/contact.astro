@@ -1,12 +1,14 @@
 ---
 import { BaseLayout } from 'layouts';
-import { Anchor, ContactInformation, SupportInformation, RotatingCircleText } from '../components/astro';
+import { Anchor, ContactInformation, SupportInformation, RotatingCircleText, LineText } from '../components/astro';
 import { LuArrowDown, LuArrowRight, LuArrowUpRight, LuMail, LuPhone } from 'react-icons/lu/index.js';
 import { ContactForm } from '../components/react';
 import { BsMailbox, BsPhone, BsWhatsapp } from 'react-icons/bs/index.js';
 
 import profileImage from 'assets/profile-placeholder.jpg';
 import { Image } from 'astro:assets';
+
+console.log(Astro.request.headers.get('accept-language'));
 ---
 
 <BaseLayout title="Simon Schwitzky | Kontakt">
@@ -26,19 +28,15 @@ import { Image } from 'astro:assets';
 						</div>
 					</div>
 
-					<div class="mt-7 flex items-center space-x-7">
+					<div
+						class="mt-7 flex flex-col items-stretch space-y-3 sm:flex-row sm:items-center sm:space-x-3 sm:space-y-0"
+					>
 						<Anchor icon={LuArrowDown} href="#info" class="" theme="primary" size="lg">
 							Check out contact options below
 						</Anchor>
-						{
-							/*<div class="mx-4 flex items-center space-x-2">
-							<span class="block h-px w-6 bg-gray-300"></span>
-							<span>or</span>
-							<span class="block h-px w-6 bg-gray-300"></span>
-						</div>*/
-						}
+						<LineText class="self-center text-sm">or</LineText>
 						<Anchor icon={LuArrowRight} href="/" class="" theme="secondary" size="lg">
-							Back to Homepage
+							Go back to homepage
 						</Anchor>
 					</div>
 				</div>
@@ -112,12 +110,14 @@ import { Image } from 'astro:assets';
 
 		<section id="services" class="bg-gray-100 px-4 pb-16 pt-24 transition-[padding] sm:px-12">
 			<div class="mx-auto flex w-full max-w-7xl flex-col items-center">
-				<span>Need a fast turnaround?</span>
-				<h2>Book my services immediately</h2>
-				<div class="mt-7 flex items-center md:mt-0">
+				<span class="text-sm">Need a fast turnaround?</span>
+				<h2 class="text-xl sm:text-3xl">Book my services immediately</h2>
+				<div
+					class="mt-7 flex flex-col items-stretch space-y-3 xs:flex-row xs:items-center xs:space-x-3 xs:space-y-0"
+				>
 					<Anchor size="lg" theme="primary" icon={LuArrowRight}>App Development</Anchor>
-					<span class="mx-3 text-sm">or</span>
-					<Anchor size="lg" theme="primary" icon={LuArrowRight}>Website Management</Anchor>
+					<LineText class="self-center text-sm">or</LineText>
+					<Anchor size="lg" theme="primary" icon={LuArrowRight}>Web & Social Management</Anchor>
 				</div>
 			</div>
 		</section>

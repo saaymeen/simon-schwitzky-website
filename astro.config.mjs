@@ -9,4 +9,14 @@ export default defineConfig({
 	vite: {
 		plugins: [glsl()],
 	},
+	i18n: {
+		defaultLocale: 'de',
+		locales: ['de', 'en'],
+		routing: {
+			prefixDefaultLocale: false,
+		},
+		fallback: {
+			en: 'de',
+		},
+	},
 });

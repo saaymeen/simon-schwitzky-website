@@ -1,6 +1,6 @@
 ---
 import { LuArrowRight } from 'react-icons/lu/index.js';
-import { Anchor } from '../astro';
+import { Anchor, Button } from '../astro';
 ---
 
 <section
@@ -13,15 +13,14 @@ import { Anchor } from '../astro';
 			<p class="mt-1">Setting up a call takes less than a minute of your time.</p>
 		</div>
 
-		<Anchor
-			href="/contact"
+		<Button
 			size="lg"
 			theme="primary"
 			icon={LuArrowRight}
-			href="Schedule a call"
 			class="mt-3 sm:mt-0"
+			onclick="Calendly.initPopupWidget({url: 'https://calendly.com/mail-quu9'});return false;"
 		>
-			Schedule call</Anchor
+			Schedule call</Button
 		>
 	</div>
 	<div class="mx-auto mt-5 flex w-full max-w-7xl flex-col">

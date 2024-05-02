@@ -2,13 +2,13 @@
 import type { PressableProps } from '../../types/pressable';
 import Pressable from './pressable.astro';
 
-type Props = PressableProps & astroHTML.JSX.AnchorHTMLAttributes;
+type Props = PressableProps & astroHTML.JSX.ButtonHTMLAttributes;
 
 const { icon, size, theme, ...rest } = Astro.props;
 ---
 
-<a {...rest}>
+<button {...rest}>
 	<Pressable icon={icon} size={size} theme={theme}>
 		<slot />
 	</Pressable>
-</a>
+</button>

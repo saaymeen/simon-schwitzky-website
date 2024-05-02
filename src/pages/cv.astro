@@ -6,6 +6,12 @@ import { CVHeader, CVExperienceCard, CVProjectCard, CVContent } from 'components
 
 import service1 from 'assets/service-1.jpg';
 import { Socials } from 'components/astro';
+
+const links = [
+	{ href: '#about', label: 'Infos', id: 'cv-about' },
+	{ href: '#experience', label: 'Lebenslauf', id: 'cv-experience' },
+	{ href: '#projects', label: 'Arbeiten', id: 'cv-work' },
+];
 ---
 
 <BaseLayout className="relative bg-white" title="Simon Schwitzky">
@@ -19,12 +25,28 @@ import { Socials } from 'components/astro';
 					<br />
 					accessible digital experiences.
 				</p>
+				<nav class="mb-8 mt-16 hidden lg:flex">
+					<ul class="flex flex-col space-y-2">
+						{
+							links.map((link) => (
+								<li>
+									<a id={link.id} href={link.href} class="cv-navlink group flex items-center">
+										<span class="mr-4 block h-px w-12 bg-gray-400 transition-all group-hover:w-16 group-hover:bg-gray-800 group-[.active]:w-16 group-[.active]:bg-gray-800" />
+										<span class="text-xs font-medium uppercase text-gray-600 transition-colors group-hover:text-gray-800 group-[.active]:text-gray-800">
+											{link.label}
+										</span>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</nav>
 				<Socials className="mt-8" />
 			</CVContent>
 
 			<div class="flex h-full flex-col">
-				<section id="about" class="mt-16">
-					<CVHeader>About</CVHeader>
+				<section data-navlink="cv-about" id="about" class="pb-16 pt-24">
+					<CVHeader>Infos</CVHeader>
 					<CVContent className="mt-4">
 						<p>
 							Back in 2012, I decided to try my hand at creating custom Tumblr themes and tumbled head
@@ -43,8 +65,8 @@ import { Socials } from 'components/astro';
 					</CVContent>
 				</section>
 
-				<section id="experience" class="mt-12">
-					<CVHeader>Experience</CVHeader>
+				<section data-navlink="cv-experience" id="experience" class="pb-16 pt-24">
+					<CVHeader>Lebenslauf</CVHeader>
 					<CVContent as="ul" className="mt-4" wrapperClassName="space-y-12">
 						<CVExperienceCard
 							time="2024 — Present"
@@ -115,8 +137,8 @@ import { Socials } from 'components/astro';
 					</CVContent>
 				</section>
 
-				<section id="projects" class="mt-12">
-					<CVHeader>Projects</CVHeader>
+				<section data-navlink="cv-work" id="projects" class="pb-16 pt-24">
+					<CVHeader>Arbeiten</CVHeader>
 					<CVContent as="ul" className="mt-4" wrapperClassName="space-y-12">
 						<CVProjectCard
 							title="Build a Spotify connected app"
@@ -152,27 +174,33 @@ import { Socials } from 'components/astro';
 						</CVProjectCard>
 					</CVContent>
 				</section>
-
-				<section id="editorial" class="mt-12 pb-24">
-					<CVHeader>Editorial</CVHeader>
-					<CVContent>
-						<p>
-							Back in 2012, I decided to try my hand at creating custom Tumblr themes and tumbled head
-							first into the rabbit hole of coding and web development. Fast-forward to today, and I’ve
-							had the privilege of building software for an advertising agency, a start-up, a huge
-							corporation, and a digital product studio.
-							<br /><br />
-							My main focus these days is building accessible user interfaces for our customers at Klaviyo.
-							I most enjoy building software in the sweet spot where design and engineering meet — things that
-							look good but are also built well under the hood. In my free time, I've also released an online
-							video course that covers everything you need to know to build a web app with the Spotify API.
-							<br /><br />
-							When I’m not at the computer, I’m usually rock climbing, reading, hanging out with my wife and
-							two cats, or running around Hyrule searching for Korok seeds Korok seeds.
-						</p>
-					</CVContent>
-				</section>
 			</div>
 		</div>
 	</main>
 </BaseLayout>
+
+<script>
+	const sections = document.querySelectorAll('[data-navlink]');
+	const navlinks = document.querySelectorAll('.cv-navlink');
+
+	function updateNavbar() {
+		let highlightID = 'cv-about';
+		sections.forEach((section) => {
+			if (section.getBoundingClientRect().top <= 0) {
+				const attributeValue = section.getAttribute('data-navlink');
+				if (attributeValue !== null) {
+					highlightID = attributeValue;
+				}
+			}
+		});
+
+		navlinks.forEach((navlink) => navlink.classList.remove('active'));
+		const target = document.getElementById(highlightID);
+		if (target !== null) {
+			target.classList.add('active');
+		}
+	}
+
+	window.addEventListener('scroll', updateNavbar);
+	updateNavbar();
+</script>

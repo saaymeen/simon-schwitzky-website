@@ -60,7 +60,7 @@ function TestimonialSlider(): ReactNode {
 	const autoplayPlugin = useRef(Autoplay({ stopOnInteraction: true })).current;
 	const [emblaRef, emblaAPI] = useEmblaCarousel({ loop: true, align: 'start' }, [autoplayPlugin]);
 
-	const [_, setSelectedIndex] = useState(0);
+	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const onSelect = useCallback(() => {
 		if (!emblaAPI) return;
@@ -81,8 +81,17 @@ function TestimonialSlider(): ReactNode {
 			<ul className="mb-7 grid grid-cols-2 gap-x-7 gap-y-5 sm:grid-cols-3">
 				{testimonials.map(({ key, logo }, index) => (
 					<li key={key} className="flex items-center justify-center">
-						<button onClick={() => emblaAPI?.scrollTo(index)} className="flex items-center justify-center">
-							<img src={logo} className="max-h-8" />
+						<button
+							onClick={() => emblaAPI?.scrollTo(index)}
+							className="flex items-center justify-center hover:cursor-pointer"
+						>
+							<img
+								src={logo}
+								className={clsx(
+									'max-h-8 transition-transform',
+									selectedIndex === index && 'scale-[1.3]',
+								)}
+							/>
 						</button>
 					</li>
 				))}

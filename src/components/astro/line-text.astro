@@ -1,0 +1,13 @@
+---
+import clsx from 'clsx';
+
+type Props = astroHTML.JSX.HTMLAttributes;
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class={clsx('flex items-center space-x-3 text-gray-600', className)} {...rest}>
+	<span class="h-px w-6 bg-gray-400"></span>
+	<span><slot /></span>
+	<span class="h-px w-6 bg-gray-400"></span>
+</div>
