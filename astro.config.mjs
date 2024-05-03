@@ -6,8 +6,13 @@ import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import { locales, defaultLocale, localeMap } from './src/config/i18n.mjs';
 import { passthroughImageService } from 'astro/config';
+import { imageService } from '@unpic/astro/service';
 
 const site = 'https://simonschwitz.ky';
+
+// @astrojs/cloudflare@0.0.0-cf-deps-chunk-20240407075425
+// update dependency once this is fixed
+// https://github.com/withastro/adapters/issues/211
 
 export default defineConfig({
 	integrations: [
@@ -64,5 +69,5 @@ export default defineConfig({
 	server: {
 		host: '0.0.0.0',
 	},
-	image: { service: passthroughImageService() },
+	image: { service: imageService() },
 });
