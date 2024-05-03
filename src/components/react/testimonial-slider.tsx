@@ -1,62 +1,52 @@
-import { useRef, type ReactNode, useCallback, useEffect, useState } from 'react';
+import { useRef, type ReactNode, useCallback, useEffect, useState, useMemo } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import clsx from 'clsx';
-import { LuChevronRight } from 'react-icons/lu/index.js';
+import { getTranslation } from '../../utils/i18n';
 
-const testimonials = [
-	{
-		key: '1',
-		text: '1 At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: '/kraftverkehr-logo.png',
-	},
-	{
-		key: '2',
-		text: 'At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: '/ase-logo.svg',
-	},
-	{
-		key: '3',
-		text: 'At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: '/alexxanders-logo.svg',
-	},
-	{
-		key: '4',
-		text: 'At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: '/sekuris-logo.png',
-	},
-	{
-		key: '5',
-		text: 'At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: '/coreku-logo.png',
-	},
-	{
-		key: '6',
-		text: 'At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: '/dtc-logo.png',
-	},
-	/*{
-		key: '7',
-		text: 'At WAC, we are all about creating a habitat that lets you grow stronger roots and larger branches. Together let’s make a fruitful journey!',
-		position: 'Head of Marketing',
-		client: 'Willy Wigger',
-		logo: 'https://admin.wac.co/uploads/Group_167339_823388c040.svg',
-	},*/
-];
+interface TestimonialSliderProps {
+	currentLocale: string | undefined;
+}
 
-function TestimonialSlider(): ReactNode {
+const translations = {
+	en: {
+		readFullStory: 'Read the full story',
+		kraftverkehrPosition: 'Project- & Marketingmanagement',
+		kraftverkehr: 'Collaborating with Simon is a breeze. He is always available to us and incredibly creative.',
+		asePosition: 'CEO',
+		ase: 'Simon has modernized our digital presence. He has implemented our exact vision with his cool and professional style.',
+		alexxandersPosition: 'Service-Management',
+		alexxanders: 'Creativity, flexibility, and reliability. Simon has provided us with all of that.',
+		sekurisPosition: 'Cyber Security Management',
+		sekuris: 'We are thrilled with Simon. His work on our app has exceeded all expectations.',
+		corekuPosition: 'CEO',
+		coreku: 'Simon asstisted us with upgrading our hiring process. The collaboration was entertaining and insightful. We are impressed by his professionalism.',
+		omnifineryPosition: 'CEO',
+		omnifinery:
+			'Simon manages our E-Commerce store and maintains all POS integrations. He rocks and makes my brand glow!',
+	},
+	de: {
+		readFullStory: 'Ganze Story lesen',
+		kraftverkehrPosition: 'Projekt- & Marketingmanagement',
+		kraftverkehr:
+			'Die Zusammenarbeit mit Simon ist kinderleicht. Er ist immer für uns erreichbar und unglaublich kreativ.',
+		asePosition: 'Geschäftsführer',
+		ase: 'Simon hat unserer digitale Präsenz modernisiert. Er hat unsere Visionen mit seiner coolen und professionellen Art 1:1 umgesetzt.',
+		alexxandersPosition: 'Service-Manager',
+		alexxanders: 'Kreativität, Flexibilität und Zuverlässigkeit. All Das hat uns Simon geboten.',
+		sekurisPosition: 'Cyber Security Manager',
+		sekuris: 'Wir sind begeistert von Simon. Seine Arbeit an unserer App hat jegliche Erwartungen übertroffen.',
+		corekuPosition: 'Geschäftsführer',
+		coreku: 'Simon hat uns bei der Digitaliserung unseres Bewerbungsprozesses maßgeblich unterstützt. Die Zusammenarbeit war unterhaltsam und aufschlussreich. Wir sind von seiner Professionalität geflasth.',
+		omnifineryPosition: 'Geschäftsführer',
+		omnifinery:
+			'Simon verwaltet unseren E-Commerce Shop und kümmert sich um sämtliche POS Integrationen. Er ist unschlagbar und bringt mein Unternehmen zum Glänzen.',
+	},
+};
+
+function TestimonialSlider(props: TestimonialSliderProps): ReactNode {
+	const { currentLocale } = props;
+
 	const autoplayPlugin = useRef(Autoplay({ stopOnInteraction: true })).current;
 	const [emblaRef, emblaAPI] = useEmblaCarousel({ loop: true, align: 'start' }, [autoplayPlugin]);
 
@@ -76,6 +66,57 @@ function TestimonialSlider(): ReactNode {
 		emblaAPI.on('reInit', onSelect);
 	}, [emblaAPI, onSelect]);
 
+	const [_, testimonials] = useMemo(() => {
+		const translation = getTranslation(currentLocale, translations);
+
+		const testimonials = [
+			{
+				key: 'kraftverkehr',
+				text: translation.kraftverkehr,
+				position: translation.kraftverkehrPosition,
+				client: 'Lisa-Marie Lange',
+				logo: '/kraftverkehr-logo.png',
+			},
+			{
+				key: 'ase',
+				text: translation.ase,
+				position: translation.asePosition,
+				client: 'Dipl.-Ing. Sabine Hofmann',
+				logo: '/ase-logo.svg',
+			},
+			{
+				key: 'alexxanders',
+				text: translation.alexxanders,
+				position: translation.alexxandersPosition,
+				client: 'Diego Angelo',
+				logo: '/alexxanders-logo.svg',
+			},
+			{
+				key: 'sekuris',
+				text: translation.sekuris,
+				position: translation.sekurisPosition,
+				client: 'Jan Bamesberger',
+				logo: '/sekuris-logo.png',
+			},
+			{
+				key: 'coreku',
+				text: translation.coreku,
+				position: translation.corekuPosition,
+				client: 'Holger Wandelt',
+				logo: '/coreku-logo.png',
+			},
+			{
+				key: 'omni',
+				text: translation.omnifinery,
+				position: translation.omnifineryPosition,
+				client: 'Evgeny Avetisian',
+				logo: '/omnifinery-logo.svg',
+			},
+		];
+
+		return [translation, testimonials];
+	}, [currentLocale]);
+
 	return (
 		<>
 			<ul className="mb-7 grid grid-cols-2 gap-x-7 gap-y-5 sm:grid-cols-3">
@@ -88,7 +129,7 @@ function TestimonialSlider(): ReactNode {
 							<img
 								src={logo}
 								className={clsx(
-									'max-h-8 transition-transform',
+									'max-h-8 max-w-24 transition-transform xs:max-w-max',
 									selectedIndex === index && 'scale-[1.3]',
 								)}
 							/>
@@ -99,27 +140,16 @@ function TestimonialSlider(): ReactNode {
 
 			<div className="mt-12 px-4 sm:px-12">
 				<div ref={emblaRef} className="mx-auto flex max-w-7xl flex-col overflow-hidden">
-					<ul // className="flex mx-4 sm:mx-12"
-						className="flex"
-						//style={{ gridAutoColumns: '100%' }}
-					>
+					<ul className="flex">
 						{testimonials.map((testimonial) => (
 							<li
 								key={testimonial.key}
 								className={
-									clsx(
-										// 'px-4 sm:px-12 md:px-0 md:pl-12 flex flex-col basis-full md:basis-1/2 lg:basis-1/3 grow-0 shrink-0',
-										'mr-4 flex shrink-0 grow-0 basis-full flex-col sm:mr-12 sm:basis-[calc(50%-24px)] lg:basis-[calc(33.333%-40px)]',
-
-										// i % 2 === 0 && 'sm:pl-12 sm:pr-6',
-										// (i + 1) % 2 === 0 && 'sm:pr-12 sm:pl-6',
-									)
-									// 'min-w-0 flex-grow-0 flex-shrink-0 basis-[calc(100%-24px)] md:basis-[calc(50%-24px)] xl:basis-[calc(33.33%-72px)] bg-neutral-900 rounded-sm p-5',
-									// 'md:mr-12',
+									'mr-4 flex shrink-0 grow-0 basis-full flex-col sm:mr-12 sm:basis-[calc(50%-24px)] lg:basis-[calc(33.333%-40px)]'
 								}
 							>
-								<div className="flex flex-col rounded-sm bg-neutral-900 p-5">
-									<div>„{testimonial.text}‟</div>
+								<div className="flex flex-1 flex-col rounded-sm bg-neutral-900 p-5">
+									<div className="flex-1">„{testimonial.text}"</div>
 									<div className="mt-3 flex flex-col">
 										<span className="mb-px block text-sm text-neutral-200">
 											{testimonial.client}
@@ -128,10 +158,10 @@ function TestimonialSlider(): ReactNode {
 											<span className="block text-xs text-neutral-400">
 												{testimonial.position}
 											</span>
-											<a className="flex cursor-pointer items-center space-x-1 text-xs text-blue-400 hover:underline">
-												<span>Read the full story</span>
+											{/*<a className="flex cursor-pointer items-center space-x-1 text-xs text-blue-400 hover:underline">
+												<span>{translation.readFullStory}</span>
 												<LuChevronRight />
-											</a>
+							</a>*/}
 										</div>
 									</div>
 								</div>

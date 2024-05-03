@@ -1,31 +1,41 @@
 ---
+import { getTranslation } from '../../utils/i18n';
 
+const translations = {
+	en: {
+		text: 'Since 2018, I support businesses<br/>in their digital everyday life.<br/>Always and everywhere.',
+		legal: 'Legal',
+		privacy: 'Privacy',
+		copyright: 'All rights reserved',
+	},
+	de: {
+		text: 'Ich Unterstütze Unternehmen<br/>seit 2018 im digitalen Alltag.<br/>Immer und überall.',
+		legal: 'Impressum',
+		privacy: 'Datenschutz',
+		copyright: 'Alle Rechte vorbehalten',
+	},
+};
+
+const translation = getTranslation(Astro.currentLocale, translations);
 ---
 
 <footer class="bg-black px-4 pb-6 pt-8 text-white sm:px-12">
 	<div class="mx-auto flex w-full max-w-7xl flex-col">
 		<div class="flex flex-col items-start">
-			{/*<Logo variant="dark" />*/}
 			<span class="text-neutral-200">Simon Schwitzky</span>
-			<p class="my-5 text-xs text-neutral-400">
-				Ich unterstütze Unternehmen
-				<br />
-				seit 2018 im digitalen Alltag.
-				<br />
-				Immer und überall.
-			</p>
+			<p class="my-5 text-xs text-neutral-400" set:html={translation.text} />
 		</div>
 
 		<div
 			class="flex flex-col-reverse justify-between space-y-3 space-y-reverse md:flex-row md:items-center md:space-y-0"
 		>
-			<small class="text-xs text-neutral-400">© 2024 Simon Schwitzky. Alle Rechte vorbehalten.</small>
+			<small class="text-xs text-neutral-400">© 2024 Simon Schwitzky. {translation.copyright}.</small>
 			<ul class="flex items-center space-x-4 text-xs text-neutral-400">
 				<li>
-					<a href="/legal" class="cursor-pointer hover:underline">Impressum</a>
+					<a href="/legal" class="cursor-pointer hover:underline">{translation.legal}</a>
 				</li>
 				<li>
-					<a href="/legal" class="cursor-pointer hover:underline">Datenschutz</a>
+					<a href="/legal" class="cursor-pointer hover:underline">{translation.privacy}</a>
 				</li>
 			</ul>
 		</div>

@@ -51,7 +51,6 @@ function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
 		if (typeof form.current !== 'undefined' && form.current !== null) {
 			const formData = new FormData(form.current);
 			token = formData.get('cf-turnstile-response')?.toString() || '';
-			console.log(token);
 		}
 
 		try {

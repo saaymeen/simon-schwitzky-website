@@ -4,6 +4,44 @@ import { Marquee, Anchor } from 'components/astro';
 
 import image from 'assets/service-1.jpg';
 import { LuArrowRight } from 'react-icons/lu/index.js';
+import { getTranslation } from '../../utils/i18n';
+
+/*
+
+Web development thrives on a profound dedication to crafting digital experiences with innovation and a hint of expertise."
+
+*/
+
+const translations = {
+	en: {
+		banner: '<span class="font-bold text-black">Development</span> thrives on a profound <span class="font-bold text-black">dedication</span> to crafting <span class="font-bold text-black">digital experiences</span> with innovation and expertise.',
+		banner2:
+			'<span class="font-bold text-black">Photography</span> is driven by a deep passion for <span class="font-bold text-black">capturing life\'s</span> most <span class="font-bold text-black">precious moments</span> with artistry and a touch of magic.',
+		marquee:
+			'Mobile Apps • E-Commerce • Social Media • IoT • Landing Pages • SEO • PPC • PCB Design • Websites • Desktop Applications • Databases •',
+		tagline: 'Previous Work',
+		title: 'Get inspired<br/>by my recent journeys',
+		text: 'With over eight years of full-time experience as a passionate software developer, I have managed the successful launch of multiple products on different platforms. My expertise allows me to leap many small and medium-sized business forward into the digital age.', //helped me to countless small and medium-sized businesses to thrive in the digital era, providing tailored solutions that propel them forward. Explore my track record of innovation and client success as we embark on a journey through my past projects.",
+		learnMore: 'Learn more',
+		learnMoreText: ' about my process and what tools I use.',
+		seeAllWork: 'View more projects',
+		explore: 'Explore',
+	},
+	de: {
+		banner: '<span class="font-bold text-black">Softwareentwicklung</span> getrieben von einer <span class="font-bold text-black">Hingabe</span>, <span class="font-bold text-black">Innovation</span> und <span class="font-bold text-black">Fachkompetenz</span> zu gestalten.',
+		marquee:
+			'Smartphone Apps • E-Commerce • Social Media • IoT • Webseiten • SEO • PPC • PCB Design • Desktop Anwendungen • Datenbanken • ',
+		tagline: 'Meine Arbeiten',
+		title: 'Entdecken Sie<br/>meine letzten Projekte',
+		text: 'Mit über acht Jahren Erfahrung als Softwareentwickler habe ich den erfolgreichen Start mehrerer Produkte auf verschiedenen Plattformen geleitet. Meine Fachkompetenz ermöglicht es mir, zahlreiche kleine und mittelständische Unternehmen bei Ihrem Sprung ins digitale Zeitalter zu unterstützen.',
+		learnMore: 'Erfahren Sie mehr',
+		learnMoreText: ' über meinen Prozess und welche Technologien ich nutze.',
+		seeAllWork: 'Mehr Projekte entdecken',
+		explore: 'Ansehen',
+	},
+};
+
+const translation = getTranslation(Astro.currentLocale, translations);
 
 const projects = [
 	{
@@ -33,33 +71,32 @@ const projects = [
 <section style={{ transform: 'translate3d(0,0,0)' }} class="flex flex-col bg-white">
 	<div class="bg-neutral-100 px-4 pb-16 pt-24 sm:px-12">
 		<div class="mx-auto flex w-full max-w-7xl flex-col">
-			<span class="max-w-5xl text-3xl font-medium leading-none text-neutral-800 sm:text-5xl">
-				<span class="font-bold text-black">Photography</span> is driven by a deep passion for <span
-					class="font-bold text-black">capturing life's</span
-				> most <span class="font-bold text-black">precious moments</span> with artistry and a touch of magic.
-			</span>
+			<span
+				class="max-w-5xl text-3xl font-medium leading-none text-neutral-800 sm:text-5xl"
+				set:html={translation.banner}
+			/>
 		</div>
 	</div>
 
-	<Marquee class="bg-black py-7 text-white">
-		Apps • Webanwendungen • E-Commerce • Webseiten • Messebau • IoT • PCB Design •
-	</Marquee>
+	<Marquee class="bg-black py-7 text-white" set:html={translation.marquee} />
+
 	<div class="px-4 pb-16 pt-24 sm:px-12">
 		<div class="mx-auto flex w-full max-w-7xl flex-col">
 			<div class="flex justify-between">
 				<div class="flex max-w-md flex-col">
-					<span class="mb-1 text-neutral-600">Previous Work</span>
-					<h2 class="text-5xl">Get inspired<br />by my recent journeys</h2>
+					<span class="mb-1 text-neutral-600" set:html={translation.tagline} />
+					<h2 class="text-5xl" set:html={translation.title} />
 
 					<p class="mt-12">
-						I care about the work I do and the people I do it with. That's why I show up ready everyday to
-						create amazing projects. I'm proud to have worked with really cool people, learning powerful
-						insights along the way & gain valuable experience.
-						<br /><br />
+						<Fragment set:html={translation.text} />
+
+						{
+							/*<br /><br />
 						<a
 							class="cursor-pointer text-blue-600 transition-colors duration-75 hover:text-blue-500 hover:underline"
-							>Learn more</a
-						> about my process and what tools I use.
+							set:html={translation.learnMore}
+						/>{translation.learnMoreText}*/
+						}
 					</p>
 				</div>
 				<div class="flex flex-1"></div>
@@ -76,14 +113,14 @@ const projects = [
 											<span class="text-xl font-medium transition-colors group-hover:text-blue-600 sm:text-3xl">
 												{project.title}
 											</span>
-											<span class="flex items-center text-xs text-blue-600 sm:hidden">
-												<span>Ansehen</span>
+											{/*<span class="flex items-center text-xs text-blue-600 sm:hidden">
+												<span>{translation.explore}</span>
 												<LuArrowRight size={11} className="ml-1" />
-											</span>
+											</span>*/}
 										</div>
 										<div class="mt-1 flex items-center text-sm sm:text-base">
-											<span>{project.client}</span>
-											<span class="mx-1 my-1 w-px self-stretch rounded-md bg-neutral-600" />
+											<span class="hidden sm:inline-block">{project.client}</span>
+											<span class="mx-1 my-1 hidden w-px self-stretch rounded-md bg-neutral-600 sm:inline-block" />
 											<span>{project.type}</span>
 										</div>
 									</div>
@@ -101,9 +138,14 @@ const projects = [
 				}
 			</ul>
 
-			<Anchor icon={LuArrowRight} href="/" class="mt-12 self-start" size="lg" theme="primary"
-				>View all projects</Anchor
-			>
+			<Anchor
+				icon={LuArrowRight}
+				href="/"
+				class="mt-12 self-start"
+				size="lg"
+				theme="primary"
+				set:html={translation.seeAllWork}
+			/>
 			{
 				/*<p class="mb-1 mt-12 inline-block text-neutral-600 sm:items-center">
 				

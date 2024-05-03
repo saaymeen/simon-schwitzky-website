@@ -2,21 +2,67 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import glsl from 'vite-plugin-glsl';
+import cloudflare from '@astrojs/cloudflare';
+import sitemap from '@astrojs/sitemap';
+import { locales, defaultLocale, localeMap } from './src/config/i18n.mjs';
+import { passthroughImageService } from 'astro/config';
 
-// https://astro.build/config
+const site = 'https://simonschwitz.ky';
+
 export default defineConfig({
-	integrations: [tailwind(), react()],
+	integrations: [
+		tailwind(),
+		react(),
+		sitemap({
+			i18n: {
+				defaultLocale: 'de',
+				locales: localeMap,
+			},
+			serialize(item) {
+				// remove stuff like this from sitemap: <xhtml:link rel="alternate" hreflang="de" href="https://simonschwitz.ky/"/>
+				let targetLink = undefined;
+				item.links = item.links?.filter((link) => {
+					if (link.lang === defaultLocale && link.url.includes(site + '/' + defaultLocale) === false) {
+						targetLink = link;
+						return false;
+					}
+					return true;
+				});
+
+				if (typeof targetLink !== 'undefined') {
+					targetLink.lang = 'x-default';
+					item.links?.push(targetLink);
+				}
+
+				return item;
+			},
+		}),
+	],
 	vite: {
 		plugins: [glsl()],
 	},
+	adapter: cloudflare({
+		imageService: 'cloudflare',
+	}),
 	i18n: {
-		defaultLocale: 'de',
-		locales: ['de', 'en'],
-		routing: {
-			prefixDefaultLocale: false,
-		},
-		fallback: {
-			en: 'de',
-		},
+		locales,
+		defaultLocale,
 	},
+	//i18n: {
+	//	defaultLocale,
+	//	locales,
+	//	routing: {
+	//		prefixDefaultLocale: true,
+	//		redirectToDefaultLocale: false,
+	//	},
+	//	fallback: {
+	//		en: 'de',
+	//	},
+	//},
+	site,
+	output: 'hybrid',
+	server: {
+		host: '0.0.0.0',
+	},
+	image: { service: passthroughImageService() },
 });

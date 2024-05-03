@@ -1,6 +1,22 @@
 ---
 import { MastheadAnimations } from 'components/react/masthead-animations';
 import { Header } from 'components/page';
+import { getTranslation } from 'utils/i18n';
+
+const translations = {
+	de: {
+		heading1: 'Digitale Projekte für kleine',
+		heading2: 'und mittelständische Unternehmen.',
+		tagline: 'Ihr Partner für komplexe IT.',
+	},
+	en: {
+		heading1: 'Crafting digital experiences for',
+		heading2: 'small and medium-sized enterprises.',
+		tagline: 'Your partner for complex projects.',
+	},
+};
+
+const translation = getTranslation(Astro.currentLocale, translations);
 ---
 
 <section
@@ -12,13 +28,13 @@ import { Header } from 'components/page';
 	<div class="flex flex-1 flex-col px-4 py-16 md:px-16">
 		<div class="mx-auto flex w-full max-w-7xl flex-1 flex-col">
 			<div class="mb-auto flex-1"></div>
-			<div class="pointer-events-none z-[2] flex flex-col">
+			<div class="z-10 flex flex-col">
 				<h1 class="mt-24 text-xl text-white sm:text-3xl">
-					Crafting digital experiences for<br />small and medium-sized enterprises.
+					{translation.heading1}<br />{translation.heading2}
 				</h1>
-				<span class="text-md mt-3 text-gray-100 sm:text-xl">Your partner for digital projects.</span>
+				<span class="text-md mt-3 text-gray-100 sm:text-xl">{translation.tagline}</span>
 			</div>
-			<MastheadAnimations client:load />
+			<MastheadAnimations currentLocale={Astro.currentLocale} client:load />
 		</div>
 	</div>
 </section>

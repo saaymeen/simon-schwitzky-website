@@ -11,26 +11,37 @@ import '@fontsource/noticia-text/700.css';
 
 import { Footer } from 'components/page';
 
+import { stripLocale, getAlternateLangs } from 'utils/i18n';
+import { defaultLocale } from 'config/i18n.mjs';
+
 import clsx from 'clsx';
 
-interface Props {
+interface Props extends Omit<astroHTML.JSX.HtmlHTMLAttributes, 'lang'> {
 	title: string;
-	className?: string;
+	description?: string;
 }
 
-const { title, className = 'bg-black' } = Astro.props;
+const { title, class: className = 'bg-black', description, ...rest } = Astro.props;
 
-console.log(Astro.preferredLocale);
-console.log(Astro.preferredLocaleList);
-console.log(Astro.currentLocale);
+const [baseURL] = stripLocale(Astro.url);
+
+const alternates = getAlternateLangs(baseURL);
+const canonicalURL = new URL(baseURL, Astro.site);
+
+let lang = defaultLocale;
+if (typeof Astro.currentLocale !== 'undefined') {
+	lang = Astro.currentLocale;
+}
 ---
 
-<!doctype html>
-<html lang="de" class={clsx('flex min-h-screen flex-col scroll-smooth', className)}>
+<html lang={lang} class={clsx('flex min-h-screen flex-col scroll-smooth', className)} {...rest}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		{typeof description !== 'undefined' && <meta name="description" content={description} />}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="caonical" href={canonicalURL} />
+		{alternates.map(([path, lang]) => <link rel="alternate" hreflang={lang} href={new URL(path, Astro.site)} />)}
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -40,11 +51,10 @@ console.log(Astro.currentLocale);
 		<meta name="msapplication-TileColor" content="#212121" />
 		<meta name="theme-color" content="#212121" />
 
-		<link rel="alternate" hreflang="en" href="/en/about" />
-		<link rel="alternate" hreflang="de" href="/de/ueber-uns" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 
-		<title>{title}</title></head
-	>
+		<title>{title}</title>
+	</head>
 
 	<script is:inline data-goatcounter="https://simonschwitzky.goatcounter.com/count" async src="//gc.zgo.at/count.js"
 	></script>

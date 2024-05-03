@@ -1,33 +1,8 @@
 ---
-import { PageLayout } from '../layouts';
----
+export const prerender = false;
 
-<PageLayout title="Selfiemate">
-	<main class="flex-1 px-4 md:px-16 text-white">
-		<div class="w-full max-w-7xl mx-auto pt-24 flex flex-col">
-			<span>graessler.DIGITAL – Moritz Gräßler</span>
-			<span>Willy-Brandt-Ring 1</span>
-			<span>08606 Oelsnitz/Vogtl.</span>
-			<span class="mt-4"
-				>Tel: <a href="tel:037421573998" class="cursor-pointer hover:underline text-brand">037421573998</a
-				></span
-			>
-			<span
-				>E-Mail: <a href="mailto:cheese@selfiemate.de" class="cursor-pointer hover:underline text-brand"
-					>cheese@selfiemate.de</a
-				></span
-			>
-			<p class="mt-4">
-				Plattform der EU-Kommission zur Online-Streitbeilegung: <a
-					href="https://ec.europa.eu/consumers/odr"
-					rel="noopener noreferrer"
-					target="_blank"
-					class="text-brand hover:underline cursor-pointer">https://ec.europa.eu/consumers/odr</a
-				>
-				<br /><br />
-				Wir sind zur Teilnahme an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle weder verpflichtet
-				noch bereit.
-			</p>
-		</div>
-	</main>
-</PageLayout>
+import { getLocalizedPageURL } from '../utils/i18n';
+
+const redirectURL = getLocalizedPageURL(Astro.preferredLocale, Astro.url);
+return Astro.redirect(redirectURL, 302);
+---

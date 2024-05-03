@@ -3,11 +3,24 @@ import { Canvas } from '@react-three/fiber';
 import { Root as FBOParticles } from '../scene/thing/thing';
 import { Root as Glass } from '../scene/glass/glass';
 import clsx from 'clsx';
+import { getTranslation } from '../../utils/i18n';
 
-function MastheadAnimations(): ReactNode {
+interface MastheadAnimationsProps {
+	currentLocale: string | undefined;
+}
+
+const translations = {
+	en: { next: 'Next', prism: 'Prism', space: 'Space' },
+	de: { next: 'Danach', prism: 'Prisma', space: 'Weltraum' },
+};
+
+function MastheadAnimations(props: MastheadAnimationsProps): ReactNode {
+	const { currentLocale } = props;
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const handleChangeAnimationPress = () => setSelectedIndex((index) => (index === 0 ? 1 : 0));
+
+	const translation = getTranslation(currentLocale, translations);
 
 	return (
 		<>
@@ -21,8 +34,10 @@ function MastheadAnimations(): ReactNode {
 						<li />
 					</ul>
 					<div className="ml-3 flex flex-col items-start py-1 pr-3">
-						<span className="block text-xs text-neutral-200">Next</span>
-						<span className="block text-white">{selectedIndex === 0 ? 'Prism' : 'Particles'}</span>
+						<span className="block text-xs text-neutral-200">{translation.next}</span>
+						<span className="block text-white">
+							{selectedIndex === 0 ? translation.prism : translation.space}
+						</span>
 						<ul className="mt-auto flex w-32 space-x-3">
 							<li
 								className={clsx(
