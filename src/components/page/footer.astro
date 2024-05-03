@@ -1,5 +1,6 @@
 ---
 import { getTranslation } from '../../utils/i18n';
+import { getLocalizedHREF } from '../../utils/i18n';
 
 const translations = {
 	en: {
@@ -16,13 +17,15 @@ const translations = {
 	},
 };
 
+const indexHREF = getLocalizedHREF(Astro.currentLocale, '/');
+
 const translation = getTranslation(Astro.currentLocale, translations);
 ---
 
 <footer class="bg-black px-4 pb-6 pt-8 text-white sm:px-12">
 	<div class="mx-auto flex w-full max-w-7xl flex-col">
 		<div class="flex flex-col items-start">
-			<span class="text-neutral-200">Simon Schwitzky</span>
+			<a href={indexHREF} class="text-neutral-200">Simon Schwitzky</a>
 			<p class="my-5 text-xs text-neutral-400" set:html={translation.text} />
 		</div>
 

@@ -42,7 +42,7 @@ export default defineConfig({
 		plugins: [glsl()],
 	},
 	adapter: cloudflare({
-		imageService: 'cloudflare',
+		imageService: 'passthrough',
 	}),
 	i18n: {
 		locales,
