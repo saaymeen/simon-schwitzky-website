@@ -1,6 +1,6 @@
 ---
-import { Anchor } from '../astro';
-import { LuArrowRight } from 'react-icons/lu/index.js';
+import { Button } from '../astro';
+import { LuPhone } from 'react-icons/lu/index.js';
 import { getTranslation } from 'utils/i18n';
 
 const translations = {
@@ -8,9 +8,9 @@ const translations = {
 		about: 'Über',
 		work: 'Arbeiten',
 		editorial: 'Redaktion',
-		contact: 'Kennenlernen',
+		contact: 'Anruf vereinbaren',
 	},
-	en: { about: 'About', work: 'Work', editorial: 'Editorial', contact: 'Contact' },
+	en: { about: 'About', work: 'Work', editorial: 'Editorial', contact: 'Schedule call' },
 };
 
 const translation = getTranslation(Astro.currentLocale, translations);
@@ -22,8 +22,7 @@ const links = [
 ];
 ---
 
-{/*<header class="fixed top-0 z-20 flex w-full bg-black px-4 py-5 text-black sm:px-12">*/}
-<header class="sticky top-0 z-20 flex w-full px-4 py-5 text-black sm:px-12">
+<header class="z-20 flex w-full px-4 py-5 sm:px-12">
 	<div class="mx-auto flex max-w-7xl flex-1 items-center">
 		<span class="mr-auto flex flex-1 text-sm text-white">Simon Schwitzky</span>
 
@@ -45,55 +44,12 @@ const links = [
 		</nav>
 
 		<div class="ml-auto flex flex-1 justify-end">
-			<Anchor icon={LuArrowRight} href="/contact"> {translation.contact} </Anchor>
+			<Button
+				icon={LuPhone}
+				onclick="Calendly.initPopupWidget({url: 'https://calendly.com/mail-quu9'});return false;"
+			>
+				{translation.contact}
+			</Button>
 		</div>
 	</div>
 </header>
-
-<script>
-	/*
-	TODO: make this only query id #indexHeader as it will otherwise effect all headers on page elements
-
-	const header = document.querySelector('header');
-	const masthead = document.querySelector('#masthead');
-
-	const headerFound = typeof header !== 'undefined' && header !== null;
-	let headerHeight = 0;
-	if (headerFound) {
-		headerHeight = header.getBoundingClientRect().height;
-	}
-
-	const mastheadFound = typeof masthead !== 'undefined' && masthead !== null;
-
-	// header is initially black, if JS is disabled site will still display well
-	if (headerFound) {
-		const mastheadHeight = mastheadFound ? masthead.clientHeight : window.innerHeight;
-
-		if (window.scrollY > mastheadHeight - headerHeight) {
-			header.style.backdropFilter = 'blur(4px)';
-			header.style.webkitBackdropFilter = 'blur(4px)';
-			header.style.backgroundColor = 'black';
-		} else {
-			header.style.backgroundColor = 'transparent';
-			header.style.backdropFilter = '';
-			header.style.webkitBackdropFilter = '';
-		}
-	}
-
-	document.addEventListener('scroll', () => {
-		const mastheadHeight = mastheadFound ? masthead.clientHeight : window.innerHeight;
-
-		if (headerFound) {
-			if (window.scrollY > mastheadHeight - headerHeight) {
-				header.style.backdropFilter = 'blur(4px)';
-				header.style.backgroundColor = 'rgba(0,0,0,0.7)';
-				header.style.webkitBackdropFilter = 'blur(4px)';
-			} else {
-				header.style.backgroundColor = 'transparent';
-				header.style.webkitBackdropFilter = '';
-				header.style.backdropFilter = '';
-			}
-		}
-	});
-	*/
-</script>

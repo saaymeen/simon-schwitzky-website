@@ -1,0 +1,121 @@
+---
+import { BaseLayout } from 'layouts';
+import { Anchor, ContactInformation, SupportInformation, RotatingCircleText, LineText } from 'components/astro';
+import { LuArrowDown, LuArrowRight, LuArrowUpRight, LuMail, LuPhone } from 'react-icons/lu/index.js';
+import { ContactForm } from 'components/react';
+import { BsMailbox, BsPhone, BsWhatsapp } from 'react-icons/bs/index.js';
+
+import profileImage from 'assets/profile-placeholder.jpg';
+import { Image } from 'astro:assets';
+---
+
+<BaseLayout title="Simon Schwitzky | Kontakt">
+	<main class="flex flex-1 flex-col bg-white">
+		<section id="about" style={{ transform: 'translate3d(0,0,0)' }} class="flex flex-col bg-white px-4 sm:px-12">
+			<div class="mx-auto flex w-full max-w-7xl flex-col pb-16 pt-24 md:grid md:grid-cols-2">
+				<div class="flex flex-col">
+					<div class="flex justify-between">
+						<div class="flex flex-col">
+							<span class="mb-1 text-neutral-600">Simon Schwitzky</span>
+							<h2 class="text-5xl">Discover Digital<br />Transformation</h2>
+							<p class="mt-7 max-w-md">
+								I care about the work I do and the people I do it with. That's why I show up ready
+								everyday to create amazing projects. I'm proud to have worked with really cool people,
+								learning powerful insights along the way & gain valuable experience.
+							</p>
+						</div>
+					</div>
+
+					<div
+						class="mt-7 flex flex-col items-stretch space-y-3 sm:flex-row sm:items-center sm:space-x-3 sm:space-y-0"
+					>
+						<Anchor icon={LuArrowDown} href="#info" class="" theme="primary" size="lg">
+							Check out contact options below
+						</Anchor>
+						<LineText class="self-center text-sm">or</LineText>
+						<Anchor icon={LuArrowRight} href="/" class="" theme="secondary" size="lg">
+							Go back to homepage
+						</Anchor>
+					</div>
+				</div>
+
+				<div class="relative mt-12 flex flex-row justify-center md:ml-12 md:mt-0">
+					<div class="relative aspect-[9/16] h-72 md:h-full md:w-auto">
+						<Image src={profileImage} alt="" class="absolute h-full w-full object-cover" />
+						<div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+							<RotatingCircleText
+								label="Open for new opportunities! - Hire me now! -"
+								width={100}
+								height={100}
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="info" class="flex-1 bg-white px-4 pb-16 pt-24 transition-[padding] sm:px-12">
+			<div class="mx-auto flex w-full max-w-7xl flex-col lg:flex-row lg:justify-between">
+				<div class="flex flex-col transition-[margin] lg:mr-24 xl:mr-44">
+					<h2 class="text-3xl font-medium">Direktkontakt</h2>
+					<p class="mt-7 max-w-xs">
+						Please feel free to share your thoughts and we can discuss it over a cup of tea.
+					</p>
+
+					<ul class="my-12 grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 self-start sm:gap-x-12">
+						<ContactInformation icon={BsMailbox} title="E-Mail">
+							<a class="" href="mailto:hi@simonschwitz.ky">hi@simonschwitz.ky</a>
+						</ContactInformation>
+						<ContactInformation icon={BsPhone} title="Telefon">
+							<a class="" href="tel:+4915162671847">+49 151 62671847</a>
+						</ContactInformation>
+						<ContactInformation icon={BsWhatsapp} title="WhatsApp">
+							<a
+								class="flex items-center space-x-1"
+								href="https://wa.me/4915162671847"
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								<span>WhatsApp öffnen</span>
+								<LuArrowUpRight />
+							</a>
+						</ContactInformation>
+					</ul>
+
+					<ul class="flex flex-col space-y-4 sm:flex-row md:space-x-12 md:space-y-0">
+						<SupportInformation title="Web" text="web">
+							<Anchor icon={LuPhone}>E-Mail support</Anchor>
+						</SupportInformation>
+						<SupportInformation title="App" text="app">
+							<Anchor icon={LuMail}>Message support</Anchor>
+						</SupportInformation>
+						<SupportInformation title="MVP" text="mvp">
+							<Anchor icon={LuArrowUpRight} href="/mvp">See MVP</Anchor>
+						</SupportInformation>
+					</ul>
+				</div>
+				<div class="mt-12 flex flex-col lg:mt-0">
+					<h2 class="text-3xl font-medium">Kontaktformular</h2>
+					<p class="mb-5 mt-7 max-w-xs">
+						Please feel free to share your thoughts and we can discuss it over a cup of tea. 24 Stunden
+					</p>
+					<ContactForm client:load />
+				</div>
+			</div>
+		</section>
+
+		<section id="services" class="bg-gray-100 px-4 pb-16 pt-24 transition-[padding] sm:px-12">
+			<div class="mx-auto flex w-full max-w-7xl flex-col items-center">
+				<span class="text-sm">Need a fast turnaround?</span>
+				<h2 class="text-xl sm:text-3xl">Book my services immediately</h2>
+				<div
+					class="mt-7 flex flex-col items-stretch space-y-3 xs:flex-row xs:items-center xs:space-x-3 xs:space-y-0"
+				>
+					<Anchor size="lg" theme="primary" icon={LuArrowRight}>App Development</Anchor>
+					<LineText class="self-center text-sm">or</LineText>
+					<Anchor size="lg" theme="primary" icon={LuArrowRight}>Web & Social Management</Anchor>
+				</div>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

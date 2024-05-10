@@ -1,0 +1,51 @@
+---
+import { BaseLayout } from 'layouts';
+
+import AboutSection from './about-section.astro';
+import EditorialSection from './editorial-section.astro';
+import HireMeSection from './hire-me-section.astro';
+import MastheadSection from './masthead-section.astro';
+import NewsletterSection from './newsletter-section.astro';
+import ScheduleCallSection from './schedule-call-section.astro';
+import TestimonialsSection from './testimonials-section.astro';
+import WorkSection from './work-section.astro';
+import ServicesSection from './services-section.astro';
+
+let renderMasthead = false;
+let renderAbout = false;
+let renderWork = false;
+let renderServices = true;
+let renderTestimonials = false;
+let renderNewsletter = false;
+let renderHireMe = false;
+let renderEditorial = false;
+let renderScheduleCall = false;
+
+const renderAllOnDev = true;
+
+if (import.meta.env.PROD || renderAllOnDev) {
+	renderMasthead = true;
+	renderAbout = true;
+	renderWork = true;
+	renderServices = true;
+	renderTestimonials = true;
+	renderNewsletter = false;
+	renderHireMe = true;
+	renderEditorial = true;
+	renderScheduleCall = true;
+}
+---
+
+<BaseLayout title="Simon Schwitzky">
+	<main class="flex flex-1 flex-col">
+		{renderMasthead ? <MastheadSection /> : <div class="flex-1 pt-24" />}
+		{renderAbout && <AboutSection />}
+		{renderWork && <WorkSection />}
+		{renderServices && <ServicesSection />}
+		{renderTestimonials && <TestimonialsSection />}
+		{renderNewsletter && <NewsletterSection />}
+		{renderHireMe && <HireMeSection />}
+		{renderEditorial && <EditorialSection />}
+		{renderScheduleCall && <ScheduleCallSection />}
+	</main>
+</BaseLayout>

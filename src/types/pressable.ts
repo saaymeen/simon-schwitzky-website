@@ -1,9 +1,10 @@
 import type { IconType } from 'react-icons/lib';
 
 interface PressableProps {
-	icon: IconType;
+	icon?: IconType;
 	size?: 'base' | 'lg';
-	theme?: 'primary' | 'secondary';
+	theme?: 'primary' | 'secondary' | 'white';
+	iconAnimation?: 'right' | 'top-right' | 'down' | 'zoom';
 }
 
 export { type PressableProps };

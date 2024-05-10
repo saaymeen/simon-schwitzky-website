@@ -1,0 +1,42 @@
+---
+import { HiCodeBracketSquare } from 'react-icons/hi2/index.js';
+import AdCard from './ad-card.astro';
+
+import mock from 'assets/mock-2.png';
+import AdCardTitle from './ad-card-title.astro';
+
+import dtc from 'assets/dtc-connect-logo.png';
+import selfiemate from 'assets/appstore.png';
+import { Image } from 'astro:assets';
+---
+
+<AdCard icon={HiCodeBracketSquare} title="App" niche="Development" image={mock} alt="">
+	<div class="m-3 flex">
+		<div class="flex flex-col">
+			<AdCardTitle title="App" niche="Development" icon={HiCodeBracketSquare} />
+			<p class="ml-5 mt-2 max-w-56 text-sm">
+				Performant and accessible mobile applications for iOS and Android. Endless possibilities.
+			</p>
+		</div>
+	</div>
+	<ul class="grid flex-1 grid-cols-[auto,auto] grid-rows-3">
+		<div class="relative h-full w-full">
+			<Image src={dtc} alt="" class="absolute h-full w-full object-contain" />
+		</div>
+		<div class="relative h-full w-full">
+			<Image src={selfiemate} alt="" class="absolute h-full w-full object-contain" />
+		</div>
+		<div class="relative h-full w-full">
+			<Image src={selfiemate} alt="" class="absolute h-full w-full object-contain" />
+		</div>
+		<div class="relative h-full w-full">
+			<Image src={dtc} alt="" class="absolute h-full w-full object-contain" />
+		</div>
+		<div class="relative h-full w-full">
+			<Image src={dtc} alt="" class="absolute h-full w-full object-contain" />
+		</div>
+		<div class="relative h-full w-full">
+			<Image src={selfiemate} alt="" class="absolute h-full w-full object-contain" />
+		</div>
+	</ul>
+</AdCard>

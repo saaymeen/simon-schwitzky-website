@@ -1,3 +1,6 @@
+export { default as AppDevelopmentAdCard } from './ad-card-app.astro';
+export { default as MVPDevelopmentAdCard } from './ad-card-mvp.astro';
+export { default as WebSocialManagementAdCard } from './ad-card-web-social-management.astro';
 export { default as Anchor } from './anchor.astro';
 export { default as HorizontalBlogCard } from './blog-card-horizontal.astro';
 export { default as ImageBlogCard } from './blog-card-image.astro';
@@ -12,6 +15,7 @@ export { default as CVProjectCard } from './cv-project-card.astro';
 export { default as CVSection } from './cv-section.astro';
 export { default as LineText } from './line-text.astro';
 export { default as Marquee } from './marquee.astro';
+export { default as MastheadStat } from './masthead-stat.astro';
 export { default as RotatingCircleText } from './rotating-circle-text.astro';
 export { default as Socials } from './socials.astro';
 export { default as SupportInformation } from './support-information.astro';

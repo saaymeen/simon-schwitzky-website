@@ -1,0 +1,24 @@
+---
+import clsx from 'clsx';
+import type { IconType } from 'react-icons/lib';
+
+interface Props extends astroHTML.JSX.LiHTMLAttributes {
+	icon: IconType;
+	title: string;
+	text: string;
+}
+
+const { icon: Icon, title, text, class: className, ...rest } = Astro.props;
+---
+
+<li class={clsx('flex flex-col', className)} {...rest}>
+	<a href="/" class="flex flex-col rounded-sm bg-neutral-800">
+		<div>
+			<Icon />
+		</div>
+		<div class="flex max-w-44 flex-col">
+			<span>{title}</span>
+			<span>{text}</span>
+		</div>
+	</a>
+</li>

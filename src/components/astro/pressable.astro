@@ -1,19 +1,31 @@
 ---
 import clsx from 'clsx';
+import { type CSSProperties } from 'react';
 import { type PressableProps } from 'types/pressable';
 
 type Props = PressableProps & astroHTML.JSX.HTMLAttributes;
 
-const { icon: Icon, size = 'base', class: className, theme = 'secondary', ...rest } = Astro.props;
+const {
+	icon: Icon,
+	iconAnimation = 'zoom',
+	size = 'base',
+	class: className,
+	theme = 'secondary',
+	...rest
+} = Astro.props;
 ---
 
 <div
 	class={clsx(
-		'flex items-center justify-center transition-colors rounded-sm group cursor-pointer',
+		'flex items-center border justify-center transition-colors rounded-sm group cursor-pointer',
 		size === 'base' && 'text-xs py-2 pl-3 pr-2',
+		size === 'base' && typeof Icon === 'undefined' && 'pr-3',
 		size === 'lg' && 'text-base py-3 pl-5 pr-3',
-		theme === 'secondary' && 'bg-neutral-800 hover:bg-neutral-700 text-white',
-		theme === 'primary' && 'border-blue-500 bg-blue-600 text-white',
+		size === 'lg' && typeof Icon === 'undefined' && 'pr-5',
+		theme === 'secondary' &&
+			'bg-neutral-800 border-neutral-700 hover:border-neutral-600 hover:bg-neutral-700 text-white',
+		theme === 'primary' && 'border-blue-500 bg-blue-600 hover:bg-blue-500 text-white',
+		theme === 'white' && 'border-neutral-200 bg-white hover:bg-neutral-100 text-black',
 		className,
 	)}
 	{...rest}
@@ -21,12 +33,39 @@ const { icon: Icon, size = 'base', class: className, theme = 'secondary', ...res
 	<span class="block">
 		<slot />
 	</span>
-	<Icon
-		size={clsx(size === 'base' && 12, size === 'lg' && 16)}
-		className={clsx(
-			'block transition-all',
-			size === 'base' && 'ml-1 mr-1 group-hover:ml-2 group-hover:mr-0',
-			size === 'lg' && 'ml-2 mr-2 group-hover:ml-3 group-hover:mr-1',
-		)}
-	/>
+	{
+		Icon && (
+			<div
+				class={clsx(
+					'scale-75 transition-all ',
+					iconAnimation === 'zoom' && 'group-hover:scale-100',
+					size === 'base' && iconAnimation === 'down' && 'group-hover:translate-y-[2px]',
+					size === 'lg' && iconAnimation === 'down' && 'group-hover:translate-y-1',
+				)}
+			>
+				<Icon
+					size={clsx(size === 'base' && (12 / 3) * 4, size === 'lg' && (16 / 3) * 4)}
+					className={clsx(
+						'transition-all',
+						size === 'base' && 'ml-1 mr-1',
+						size === 'lg' && 'ml-2 mr-2',
+
+						size === 'base' && iconAnimation === 'right' && ' group-hover:ml-2 group-hover:mr-0',
+						size === 'lg' && iconAnimation === 'right' && 'group-hover:ml-3 group-hover:mr-1',
+						size === 'base' &&
+							iconAnimation === 'top-right' &&
+							'group-hover:-mt-1 group-hover:mb-1 group-hover:ml-2 group-hover:mr-0',
+						size === 'lg' &&
+							iconAnimation === 'top-right' &&
+							'group-hover:-mt-2 group-hover:mb-2 group-hover:ml-3 group-hover:mr-1',
+					)}
+					style={
+						{
+							'-webkit-transform': 'translate3d(0, 0, 0)', // NOTE: required to prevent icon from jittering on safari: https://stackoverflow.com/questions/15751012/css-transform-causes-flicker-in-safari-but-only-when-the-browser-is-2000px-w
+						} as CSSProperties
+					}
+				/>
+			</div>
+		)
+	}
 </div>

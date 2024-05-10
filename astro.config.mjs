@@ -5,7 +5,6 @@ import glsl from 'vite-plugin-glsl';
 import cloudflare from '@astrojs/cloudflare';
 import sitemap from '@astrojs/sitemap';
 import { locales, defaultLocale, localeMap } from './src/config/i18n.mjs';
-import { passthroughImageService } from 'astro/config';
 import { imageService } from '@unpic/astro/service';
 
 const site = 'https://simonschwitz.ky';

@@ -1,0 +1,15 @@
+---
+import clsx from 'clsx';
+
+interface Props extends astroHTML.JSX.HTMLAttributes {
+	value: string;
+	label: string;
+}
+
+const { value, label, class: className, ...rest } = Astro.props;
+---
+
+<div class={clsx('flex flex-col', className)} {...rest}>
+	<span class="text-3xl font-bold">{value}</span>
+	<span class="mt-px text-xs text-gray-300">{label}</span>
+</div>

@@ -12,13 +12,13 @@ interface Props extends astroHTML.JSX.LiHTMLAttributes {
 const { title, description, image, class: className, ...rest } = Astro.props;
 ---
 
-<li class={clsx('flex relative group rounded-sm overflow-hidden cursor-pointer', className)} {...rest}>
+<li class={clsx('flex relative group rounded-sm overflow-hidden cursor-pointer min-h-48', className)} {...rest}>
 	<div class="z-20 flex flex-col justify-between p-4 text-white">
-		<span>{title}</span>
-		<p class="text-gray-200">{description}</p>
+		<span class="font-serif text-base font-medium">{title}</span>
+		<p class="mt-3 max-w-sm font-serif text-sm text-gray-200">{description}</p>
 	</div>
 	<div class="absolute h-full w-full">
-		<div class="absolute z-10 h-full w-full bg-black/70"></div>
+		<div class="absolute z-10 h-full w-full bg-black/50"></div>
 		<Image
 			src={image.src}
 			alt={image.alt}

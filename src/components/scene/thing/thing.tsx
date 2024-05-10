@@ -115,7 +115,7 @@ const FBOParticles = () => {
 
 export const Root = () => {
 	const { scale } = useSpring({
-		to: { scale: 5 },
+		to: { scale: 7 },
 		from: { scale: 1 },
 		config: { friction: 50 },
 	});

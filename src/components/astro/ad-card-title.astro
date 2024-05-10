@@ -1,0 +1,25 @@
+---
+import clsx from 'clsx';
+import type { IconType } from 'react-icons/lib';
+
+interface Props extends astroHTML.JSX.HTMLAttributes {
+	title: string;
+	niche: string;
+	icon: IconType;
+}
+
+const { title, niche, icon: Icon, class: className, ...rest } = Astro.props;
+---
+
+<div class={clsx('', className)} {...rest}>
+	<div class="flex items-center">
+		<div class="flex w-5">
+			<Icon />
+		</div>
+		<span class="text-sm font-medium">{title}</span>
+	</div>
+	<div class="flex">
+		<span class="flex w-5 text-sm"></span>
+		<span class="text-xs text-neutral-400">{niche}</span>
+	</div>
+</div>

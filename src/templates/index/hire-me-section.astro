@@ -1,0 +1,80 @@
+---
+import { RotatingCircleText } from 'components/astro';
+import { Image } from 'astro:assets';
+
+import image from 'assets/profile-placeholder.jpg';
+import { getTranslation } from 'utils/i18n';
+
+const translations = {
+	en: {
+		tagline: 'Worryless Collaboration',
+		title: 'Always on time.<br/>Always as promised.',
+		text: 'With special attention to the differences each project brings, I connect perfectionism and realism to help my clients achieve their vision. My relaxed style helps me to stay calm in all situations.',
+		years: 'Years',
+		projects: 'Projects',
+		businesses: 'Businesses',
+		experience: 'Experience in Tech',
+		work: 'Successfully completed',
+		leap: 'Leaped into the digital age',
+		circle: 'Open for new opportunities! - Hire me now! -',
+	},
+	de: {
+		tagline: 'Sorgenfreie Zusammenarbeit',
+		title: 'Immer pünktlich.<br/>Immer wie abgemacht.',
+		text: 'Mit einem besonderen Augenmerk auf die Unterschiedlichen Anforderungen verschiedener Projekte verbinde ich Perfektion und Realismus, um Kunden profesionell zu Ihrem Ziel zu führen. Meine lockere Art hilft mir in allen Situationen einen Kühlen Kopf zu bewahren.',
+		years: 'Jahre',
+		projects: 'Projekte',
+		businesses: 'Unternehmen',
+		experience: 'Erfahrung im Tech-Sektor',
+		work: 'Erfolgreich Abgeschlossen',
+		leap: 'Ins digitale Zeitalter geführt',
+		circle: 'Offen für neue Aufträge - Open to hire -',
+	},
+};
+
+const translation = getTranslation(Astro.currentLocale, translations);
+
+const stats = [
+	{
+		title: (new Date().getFullYear() - 2015).toString() + ' ' + translation.years,
+		tagline: translation.experience,
+	},
+	{
+		title: '22+ ' + translation.projects,
+		tagline: translation.work,
+	},
+	{
+		title: '19 ' + translation.businesses,
+		tagline: translation.leap,
+	},
+];
+---
+
+<section style={{ transform: 'translate3d(0,0,0)' }} class="bg-white px-4 pb-16 pt-24 sm:px-12">
+	<div class="mx-auto flex w-full max-w-7xl flex-col md:grid md:grid-cols-2">
+		<div class="flex flex-col">
+			<span class="mb-1 text-neutral-600" set:html={translation.tagline} />
+			<h2 class="mb-12 text-5xl" set:html={translation.title} />
+			<p class="max-w-md" set:html={translation.text} />
+			<ul class="mt-12 flex flex-col space-y-7 lg:flex-row lg:space-x-7 lg:space-y-0">
+				{
+					stats.map((stat) => (
+						<li class="flex flex-col items-start">
+							<span class="whitespace-nowrap text-3xl font-medium">{stat.title}</span>
+							<span class="mt-1 whitespace-nowrap text-sm text-neutral-600">{stat.tagline}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<div class="relative mt-12 flex flex-row justify-center md:ml-12 md:mt-0">
+			<div class="relative aspect-[9/16] h-72 md:h-full md:w-auto">
+				<Image src={image} alt="" class="absolute h-full w-full object-cover" />
+				<div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+					<RotatingCircleText label={translation.circle} width={100} height={100} />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

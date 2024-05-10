@@ -2,11 +2,11 @@
 import clsx from 'clsx';
 import { BsTwitterX, BsGithub, BsLinkedin, BsInstagram } from 'react-icons/bs/index.js';
 
-interface Props {
-	className?: string;
+interface Props extends astroHTML.JSX.HTMLAttributes {
+	theme?: 'light' | 'dark';
 }
 
-const { className } = Astro.props;
+const { theme = 'light', class: className } = Astro.props;
 
 const socials = [
 	{
@@ -36,7 +36,11 @@ const socials = [
 					href={href}
 					rel="noopener noreferrer"
 					target="_blank"
-					class="text-neutral-600 transition-colors hover:text-black"
+					class={clsx(
+						'transition-colors',
+						theme === 'light' && 'text-neutral-600 hover:text-black',
+						theme === 'dark' && 'text-neutral-400 hover:text-white',
+					)}
 				>
 					<Icon size={24} />
 				</a>

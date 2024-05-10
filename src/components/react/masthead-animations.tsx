@@ -1,21 +1,20 @@
-import { useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Root as FBOParticles } from '../scene/thing/thing';
-import { Root as Glass } from '../scene/glass/glass';
-import clsx from 'clsx';
-import { getTranslation } from '../../utils/i18n';
 
-interface MastheadAnimationsProps {
-	currentLocale: string | undefined;
+function MastheadAnimations(): ReactNode {
+	return (
+		<div className="absolute inset-0 z-[1] flex items-center justify-center">
+			<Canvas camera={{ position: [4, -2, 7] }} dpr={[1, 2]}>
+				<FBOParticles />
+			</Canvas>
+		</div>
+	);
 }
 
-const translations = {
-	en: { next: 'Next', prism: 'Prism', space: 'Space' },
-	de: { next: 'Danach', prism: 'Prisma', space: 'Weltraum' },
-};
-
+/*
 function MastheadAnimations(props: MastheadAnimationsProps): ReactNode {
-	const { currentLocale } = props;
+	// const { currentLocale } = props;
 	const [selectedIndex, setSelectedIndex] = useState(0);
 
 	const handleChangeAnimationPress = () => setSelectedIndex((index) => (index === 0 ? 1 : 0));
@@ -64,6 +63,6 @@ function MastheadAnimations(props: MastheadAnimationsProps): ReactNode {
 			</div>
 		</>
 	);
-}
+}*/
 
 export { MastheadAnimations };

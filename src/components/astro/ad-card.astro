@@ -1,0 +1,22 @@
+---
+import type { ImageMetadata } from 'astro';
+import clsx from 'clsx';
+import type { IconType } from 'react-icons/lib';
+
+interface Props extends astroHTML.JSX.HTMLAttributes {
+	image: ImageMetadata;
+	alt: string;
+	title: string;
+	niche: string;
+	icon: IconType;
+}
+
+const { image, alt, title, niche, icon: Icon, class: className, ...rest } = Astro.props;
+---
+
+<article
+	class={clsx('flex flex-1 items-stretch rounded-sm border border-gray-800 bg-neutral-900 text-white', className)}
+	{...rest}
+>
+	<slot />
+</article>
