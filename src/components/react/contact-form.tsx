@@ -9,6 +9,7 @@ import { TextInput } from './text-input';
 import { TextArea } from './text-area';
 import { Button } from './button';
 import clsx from 'clsx';
+import { getTranslation } from '../../utils/i18n';
 
 const schema = z.object({
 	name: z.string().min(2, 'Bitte geben Sie einen Namen an'),
@@ -20,8 +21,39 @@ const schema = z.object({
 type FormInput = z.input<typeof schema>;
 type FormOutput = z.output<typeof schema>;
 
-function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
-	const { className, ...rest } = props;
+interface ContactFormProps extends FormHTMLAttributes<HTMLFormElement> {
+	currentLocale?: string;
+}
+
+const translations = {
+	en: {
+		email: 'E-Mail',
+		mobile: 'Phone',
+		name: 'Name',
+		namePlaceholder: 'John Doe',
+		emailPlaceholder: 'jon@doe.com',
+		mobilePlaceholder: '+1 (310) 123-456',
+		message: 'Message',
+		messagePlaceholder: 'Hi Simon, ...',
+		sendMessage: 'Send message',
+	},
+	de: {
+		email: 'E-Mail',
+		mobile: 'Telefon',
+		name: 'Name',
+		namePlaceholder: 'Max Mustermann',
+		emailPlaceholder: 'max@mustermann.de',
+		mobilePlaceholder: '+49 151 44117777',
+		message: 'Nachricht',
+		messagePlaceholder: 'Hallo Simon, ...',
+		sendMessage: 'Nachricht senden',
+	},
+};
+
+function ContactForm(props: ContactFormProps): ReactNode {
+	const { className, currentLocale, ...rest } = props;
+
+	const translation = getTranslation(currentLocale, translations);
 
 	const {
 		register,
@@ -80,27 +112,27 @@ function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
 			<div className="flex flex-col space-y-3 md:flex-row md:space-x-4 md:space-y-0">
 				<TextInput
 					error={errors.email}
-					placeholder="max@musterfamilie.de"
+					placeholder={translation.emailPlaceholder}
 					{...register('email')}
 					type="email"
-					label="E-Mail"
+					label={translation.email}
 					className="flex-1"
 					required
 				/>
 				<TextInput
-					placeholder="0151 1234 5678"
+					placeholder={translation.mobilePlaceholder}
 					error={errors.mobile}
 					{...register('mobile')}
 					type="tel"
 					className="flex-1"
-					label="Telefon"
+					label={translation.mobile}
 				/>
 			</div>
 			<TextArea
-				placeholder="Hallo Axel, ..."
+				placeholder={translation.messagePlaceholder}
 				error={errors.message}
 				{...register('message')}
-				label="Nachricht"
+				label={translation.message}
 				rows={7}
 				required
 			/>
@@ -113,7 +145,7 @@ function ContactForm(props: FormHTMLAttributes<HTMLFormElement>): ReactNode {
 			{errorMessage.length > 0 && <p className="my-4 text-sm text-red-500">{errorMessage}</p>}
 
 			<Button loading={isSubmitting} type="submit" className="self-end" size="lg" theme="primary">
-				Nachricht senden
+				{translation.sendMessage}
 			</Button>
 		</form>
 	);

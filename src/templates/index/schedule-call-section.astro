@@ -1,7 +1,7 @@
 ---
 import { LuArrowRight } from 'react-icons/lu/index.js';
 import { Button } from 'components/astro';
-import { getTranslation } from 'utils/i18n';
+import { getLocalizedHREF, getTranslation } from 'utils/i18n';
 
 const translations = {
 	en: {
@@ -23,6 +23,8 @@ const translations = {
 };
 
 const translation = getTranslation(Astro.currentLocale, translations);
+
+const contactHREF = getLocalizedHREF(Astro.currentLocale, '/contact');
 ---
 
 <section
@@ -48,7 +50,7 @@ const translation = getTranslation(Astro.currentLocale, translations);
 	<div class="mx-auto mt-5 flex w-full max-w-7xl flex-col">
 		<p class="">
 			{translation.or}
-			<a class="text-blue-400 hover:underline" href="/contact">{' '}{translation.alternateCTA}{' '}</a>{
+			<a class="text-blue-400 hover:underline" href={contactHREF}>{' '}{translation.alternateCTA}{' '}</a>{
 				translation.promise
 			}
 		</p>

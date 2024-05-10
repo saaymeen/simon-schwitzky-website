@@ -3,7 +3,7 @@ import { LuArrowRight } from 'react-icons/lu/index.js';
 
 import { Anchor } from 'components/astro';
 import { TestimonialSlider } from 'components/react';
-import { getTranslation } from 'utils/i18n';
+import { getLocalizedHREF, getTranslation } from 'utils/i18n';
 
 const translations = {
 	en: {
@@ -15,6 +15,8 @@ const translations = {
 };
 
 const translation = getTranslation(Astro.currentLocale, translations);
+
+const contactHREF = getLocalizedHREF(Astro.currentLocale, '/contact');
 ---
 
 <section class="bg-black pb-16 pt-24 text-white">
@@ -28,7 +30,7 @@ const translation = getTranslation(Astro.currentLocale, translations);
 	<div class="px-4 sm:px-12">
 		<div class="mx-auto flex w-full max-w-7xl flex-col items-start">
 			<Anchor
-				href="/contact"
+				href={contactHREF}
 				size="lg"
 				icon={LuArrowRight}
 				class="mt-7"
