@@ -31,7 +31,7 @@ const translations = {
 
 const translation = getTranslation(Astro.currentLocale, translations);
 
-const contactHREF = getLocalizedHREF(Astro.preferredLocale, '/contact');
+const contactHREF = getLocalizedHREF(Astro.currentLocale, '/contact');
 ---
 
 <section id="masthead" class="relative flex flex-col bg-black">

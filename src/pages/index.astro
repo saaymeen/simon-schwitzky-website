@@ -11,7 +11,7 @@ export const prerender = false;
 //https://codepen.io/vcomics/pen/djqNrm
 // TODO: explain somewhere why I do not need a cookie disclaimer
 
-import { getLocalizedPageURL } from '../utils/i18n';
+import { getLocalizedPageURL } from 'utils/i18n';
 
 const redirectURL = getLocalizedPageURL(Astro.preferredLocale, Astro.url);
 return Astro.redirect(redirectURL, 302);

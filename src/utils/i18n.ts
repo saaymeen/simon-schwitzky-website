@@ -55,10 +55,10 @@ function getTranslation<T extends object>(
 	throw new Error('locale not found in translations');
 }
 
-function getLocalizedHREF(prefferedLocale: string | undefined, href: string): string {
+function getLocalizedHREF(currentLocale: string | undefined, href: string): string {
 	let locale = defaultLocale;
-	if (typeof prefferedLocale !== 'undefined') {
-		locale = prefferedLocale;
+	if (typeof currentLocale !== 'undefined') {
+		locale = currentLocale;
 	}
 
 	return '/' + locale + href;

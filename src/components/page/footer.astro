@@ -1,6 +1,6 @@
 ---
-import { getTranslation } from '../../utils/i18n';
-import { getLocalizedHREF } from '../../utils/i18n';
+import { getTranslation } from 'utils/i18n';
+import { getLocalizedHREF } from 'utils/i18n';
 
 const translations = {
 	en: {
@@ -18,6 +18,8 @@ const translations = {
 };
 
 const indexHREF = getLocalizedHREF(Astro.currentLocale, '/');
+const legalHREF = getLocalizedHREF(Astro.currentLocale, '/legal');
+const privacyHREF = getLocalizedHREF(Astro.currentLocale, '/privacy');
 
 const translation = getTranslation(Astro.currentLocale, translations);
 ---
@@ -35,10 +37,17 @@ const translation = getTranslation(Astro.currentLocale, translations);
 			<small class="text-xs text-neutral-400">© 2024 Simon Schwitzky. {translation.copyright}.</small>
 			<ul class="flex items-center space-x-4 text-xs text-neutral-400">
 				<li>
-					<a href="/legal" class="cursor-pointer hover:underline">{translation.legal}</a>
+					<a href={legalHREF} class="cursor-pointer hover:underline" target="_blank" rel="noopener noreferrer"
+						>{translation.legal}</a
+					>
 				</li>
 				<li>
-					<a href="/legal" class="cursor-pointer hover:underline">{translation.privacy}</a>
+					<a
+						href={privacyHREF}
+						class="cursor-pointer hover:underline"
+						target="_blank"
+						rel="noopener noreferrer">{translation.privacy}</a
+					>
 				</li>
 			</ul>
 		</div>

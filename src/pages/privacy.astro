@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 
-import { getLocalizedPageURL } from '../utils/i18n';
+import { getLocalizedPageURL } from 'utils/i18n';
 
 const redirectURL = getLocalizedPageURL(Astro.preferredLocale, Astro.url);
 return Astro.redirect(redirectURL, 302);
