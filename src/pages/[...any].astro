@@ -1,0 +1,20 @@
+---
+export const prerender = false;
+
+import { defaultLocale, locales } from 'config/i18n.mjs';
+
+const { preferredLocale } = Astro;
+
+let targetLocale = defaultLocale;
+if (typeof preferredLocale !== 'undefined' && locales.includes(preferredLocale)) {
+	targetLocale = preferredLocale;
+}
+
+const to = '/' + targetLocale + Astro.url.pathname + Astro.url.search;
+if (locales.every((locale) => Astro.url.pathname.startsWith('/' + locale) === false)) {
+	return Astro.redirect(to, 301);
+} else {
+	Astro.response.status = 404;
+	Astro.response.statusText = 'page not found';
+}
+---

@@ -9,7 +9,7 @@ import { TextInput } from './text-input';
 import { TextArea } from './text-area';
 import { Button } from './button';
 import clsx from 'clsx';
-import { getTranslation } from '../../utils/i18n';
+import { getTranslation } from 'utils/i18n';
 
 const schema = z.object({
 	name: z.string().min(2, 'Bitte geben Sie einen Namen an'),
@@ -108,7 +108,13 @@ function ContactForm(props: ContactFormProps): ReactNode {
 			onSubmit={handleSubmit(handleFormSubmit)}
 			{...rest}
 		>
-			<TextInput error={errors.name} placeholder="Max Mustermann" {...register('name')} label="Name" required />
+			<TextInput
+				error={errors.name}
+				placeholder={translation.namePlaceholder}
+				{...register('name')}
+				label="Name"
+				required
+			/>
 			<div className="flex flex-col space-y-3 md:flex-row md:space-x-4 md:space-y-0">
 				<TextInput
 					error={errors.email}

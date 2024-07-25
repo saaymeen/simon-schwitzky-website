@@ -1,0 +1,9 @@
+export { default as About } from './about.astro';
+export { default as Editorial } from './editorial.astro';
+export { default as HireMe } from './hire-me.astro';
+export { default as Masthead } from './masthead.astro';
+export { default as Newsletter } from './newsletter.astro';
+export { default as ScheduleCall } from './schedule-call.astro';
+export { default as Services } from './services.astro';
+export { default as Testimonials } from './testimonials.astro';
+export { default as Work } from './work.astro';

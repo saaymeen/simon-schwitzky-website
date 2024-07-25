@@ -11,8 +11,10 @@ export default {
 			...defaultTheme.screens,
 		},
 		extend: {
-			sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
-			serif: ['"Noticia Text"', ...defaultTheme.fontFamily.serif],
+			fontFamily: {
+				sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
+				serif: ['"Noticia Text"', ...defaultTheme.fontFamily.serif],
+			},
 		},
 	},
 	plugins: [tailwindForms],

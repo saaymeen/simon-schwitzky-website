@@ -1,0 +1,197 @@
+---
+import { BaseLayout } from 'layouts';
+import { Anchor, ContactInformation, SupportInformation, RotatingCircleText, LineText, Button } from 'components/astro';
+import { LuArrowDown, LuArrowRight, LuArrowUpRight, LuMail, LuPhone } from 'react-icons/lu/index.js';
+import { ContactForm } from 'components/react';
+import { BsMailbox, BsPhone, BsWhatsapp } from 'react-icons/bs/index.js';
+
+import profileImage from 'assets/profile-placeholder.jpg';
+import { Image } from 'astro:assets';
+import { getTranslation } from 'utils/i18n';
+import type { InferGetStaticParamsType } from 'astro';
+
+export async function getStaticPaths() {
+	const pages = [{ lang: 'en' }, { lang: 'de' }];
+	return pages.map(({ lang }) => ({ params: { lang } }));
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+
+const currentLocale = Astro.currentLocale;
+const { lang } = Astro.params as Params;
+
+const translations = {
+	en: {
+		title: 'Discover Digital<br/>Transformation',
+		tagline: 'Simon Schwitzky',
+		text: 'Hi, I am a 25 year old application developer from Germany. I show up ready everyday to create amazing projects. I am thrilled to have you as a visitor to my page and would love to be in touch soon. Cheers!',
+		cta: 'Check out contact options below',
+		or: 'or',
+		cta2: 'Go back to homepage',
+		directTitle: 'Direct Contact',
+		directText: 'Please feel free to share your thougts and we can discuss it anytime.',
+		email: 'E-Mail',
+		mobile: 'Phone',
+		whatsapp: 'WhatsApp',
+		openWhatsapp: 'Open WhatsApp',
+		app: 'App Development',
+		appText:
+			'Call me immediately for any inquiries, issues or requests related to an ongoing App project you have with me.',
+		appCTA: 'Call now',
+		web: 'Website & Social Service',
+		webText: 'For any requests regarding my Website & Social Service, email my team for immediate action.',
+		webCTA: 'Message support',
+		mvp: 'MVP Development',
+		mvpText: 'Send me a message with a brief about your project and I will get back to you in no time.',
+		mvpCTA: 'Message me',
+		formTitle: 'Contact Form',
+		formText:
+			'Seems like I am hard to reach at the moment? Leave a message and I will get back to you in 24 hours, guaranteed!',
+		servicesTitle: 'Book my services immediately',
+		servicesTagline: 'Need a fast turnaround?',
+		scheduleCall: 'Schedule Call',
+		circleText: 'Open for new opportunities! - Hire me now! -',
+	},
+	de: {
+		title: 'Entecken Sie Digitale<br/>Transformation',
+		tagline: 'Simon Schwitzky',
+		text: 'Hi, ich bin eine 25 Jahre alter App Entwickler aus Deutschland. Ich bin jeden Tag bereit mich in neue, aufregende Projekte zu stürzen. Ich freue mich, Sie als Besucher auf meiner Webseite zu sehen und freue mich darauf, bald mit Ihnen in Kontakt zu treten. Bis dahin, alles Gute!',
+		cta: 'Kontaktoptionen ansehen',
+		or: 'oder',
+		cta2: 'Zurück zur Startseite',
+		directTitle: 'Direktkontakt',
+		directText: 'Lassen Sie und jederzeit über Ihre Ideen reden.',
+		email: 'E-Mail',
+		mobile: 'Telefon',
+		whatsapp: 'WhatsApp',
+		openWhatsapp: 'WhatsApp öffnen',
+		app: 'App Entwicklung',
+		appText:
+			'Rufen Sie mich umgehend für sämtliche Fragen, Problem oder Informationen über ein laufendes App-Projekt an.',
+		appCTA: 'Jetzt anrufen',
+		web: 'Web & Social Media Management',
+		webText:
+			'Für alle Anfragen bezüglich der Webseitenverwaltung und meinem Social Media Management kontaktieren Sie bitte umgehend mein Team.',
+		webCTA: 'Nachricht verfassen',
+		mvp: 'MVP Entwicklung',
+		mvpText: 'Schreiben Sie mir eine kurze Beschreibung Ihrer Idee und ich werde mich umgehend bei Ihnen melden.',
+		mvpCTA: 'Nachricht verfassen',
+		formTitle: 'Kontakformular',
+		formText:
+			'Bin ich gerade schwer zu erreichen? Hinterlassen Sie mir eine Nachricht und ich werde Ihnen garantiert innerhalb von 24 Stunden antworten!',
+		servicesTitle: 'Book my services immediately',
+		servicesTagline: 'Schnelle Umsetzung Bevorzugt?',
+		scheduleCall: 'Rückruf vereinbaren',
+		circleText: 'Offen für neue Aufträge - Open for hire -',
+	},
+};
+
+const translation = getTranslation(lang, translations);
+---
+
+<BaseLayout lang={lang} title="Simon Schwitzky | Kontakt">
+	<main class="flex flex-1 flex-col bg-white">
+		<section id="about" style={{ transform: 'translate3d(0,0,0)' }} class="flex flex-col bg-white px-4 sm:px-12">
+			<div class="mx-auto flex w-full max-w-7xl flex-col pb-16 pt-24 md:grid md:grid-cols-2">
+				<div class="flex flex-col">
+					<div class="flex justify-between">
+						<div class="flex flex-col">
+							<span class="mb-1 text-neutral-600" set:html={translation.tagline} />
+							<h2 class="text-5xl" set:html={translation.title} />
+							<p class="mt-7 max-w-md" set:html={translation.text} />
+						</div>
+					</div>
+
+					<div
+						class="mt-7 flex flex-col items-stretch space-y-3 lg:flex-row lg:items-center lg:space-x-3 lg:space-y-0"
+					>
+						<Anchor
+							iconAnimation="down"
+							icon={LuArrowDown}
+							href="#info"
+							class=""
+							theme="primary"
+							size="lg"
+							set:html={translation.cta}
+						/>
+						<LineText class="self-center text-sm" set:html={translation.or} />
+						<Anchor href="/" class="" theme="secondary" size="lg" set:html={translation.cta2} />
+					</div>
+				</div>
+
+				<div class="relative mt-12 flex flex-row justify-center md:ml-12 md:mt-0">
+					<div class="relative aspect-[9/16] h-72 md:h-full md:w-auto">
+						<Image src={profileImage} alt="" class="absolute h-full w-full object-cover" />
+						<div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+							<RotatingCircleText label={translation.circleText} width={100} height={100} />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="info" class="flex-1 bg-white px-4 pb-16 pt-24 transition-[padding] sm:px-12">
+			<div class="mx-auto flex w-full max-w-7xl flex-col lg:flex-row lg:justify-between">
+				<div class="flex flex-col transition-[margin] lg:mr-24 xl:mr-44">
+					<h2 class="text-3xl font-medium" set:html={translation.directTitle} />
+					<p class="mt-7 max-w-xs" set:html={translation.directText} />
+
+					<ul class="my-12 grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 self-start sm:gap-x-12">
+						<ContactInformation icon={BsMailbox} title={translation.email}>
+							<a class="" href="mailto:hi@simonschwitz.ky">hi@simonschwitz.ky</a>
+						</ContactInformation>
+						<ContactInformation icon={BsPhone} title={translation.mobile}>
+							<a class="" href="tel:+4915162671847">+49 151 62671847</a>
+						</ContactInformation>
+						<ContactInformation icon={BsWhatsapp} title="WhatsApp">
+							<a
+								class="flex items-center space-x-1"
+								href="https://wa.me/4915162671847"
+								rel="noopener noreferrer"
+								target="_blank"
+							>
+								<span set:html={translation.openWhatsapp} />
+								<LuArrowUpRight />
+							</a>
+						</ContactInformation>
+					</ul>
+
+					{
+						/*<ul class="flex flex-col space-y-4 sm:flex-row md:space-x-12 md:space-y-0">
+						<SupportInformation title={translation.app} text={translation.appText}>
+							<Anchor icon={LuPhone} set:html={translation.appCTA} />
+						</SupportInformation>
+						<SupportInformation title={translation.web} text={translation.webText}>
+							<Anchor icon={LuMail} set:html={translation.webCTA} />
+						</SupportInformation>
+						<SupportInformation title={translation.mvp} text={translation.mvpText}>
+							<Anchor icon={LuMail} set:html={translation.mvpCTA} />
+						</SupportInformation>
+					</ul>*/
+					}
+				</div>
+				<div class="mt-12 flex flex-col lg:mt-0">
+					<h2 class="text-3xl font-medium" set:html={translation.formTitle} />
+					<p class="mb-5 mt-7 max-w-xs" set:html={translation.formText} />
+					<ContactForm currentLocale={currentLocale} client:load />
+				</div>
+			</div>
+		</section>
+
+		<section id="services" class="bg-gray-100 px-4 pb-16 pt-24 transition-[padding] sm:px-12">
+			<div class="mx-auto flex w-full max-w-7xl flex-col items-center">
+				<span class="text-sm" set:html={translation.servicesTagline} />
+				<h2 class="text-xl sm:text-3xl" set:html={translation.servicesTitle} />
+
+				<Button
+					size="lg"
+					theme="primary"
+					icon={LuPhone}
+					class="mt-7"
+					onclick="Calendly.initPopupWidget({url: 'https://calendly.com/mail-quu9'});return false;"
+					set:html={translation.scheduleCall}
+				/>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

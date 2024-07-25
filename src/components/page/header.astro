@@ -8,9 +8,16 @@ const translations = {
 		about: 'Über',
 		work: 'Arbeiten',
 		editorial: 'Redaktion',
+		testimonials: 'Meinungen',
 		contact: 'Anruf vereinbaren',
 	},
-	en: { about: 'About', work: 'Work', editorial: 'Editorial', contact: 'Schedule call' },
+	en: {
+		about: 'About',
+		work: 'Work',
+		editorial: 'Editorial',
+		testimonials: 'Testimonials',
+		contact: 'Schedule call',
+	},
 };
 
 const translation = getTranslation(Astro.currentLocale, translations);
@@ -18,7 +25,8 @@ const translation = getTranslation(Astro.currentLocale, translations);
 const links = [
 	{ label: translation.about, href: '#about' },
 	{ label: translation.work, href: '#work' },
-	{ label: translation.editorial, href: '#editorial' },
+	// { label: translation.editorial, href: '#editorial' },
+	{ label: translation.testimonials, href: '#testimonials' },
 ];
 ---
 

@@ -19,26 +19,8 @@ export default defineConfig({
 		react(),
 		sitemap({
 			i18n: {
-				defaultLocale: 'de',
+				defaultLocale,
 				locales: localeMap,
-			},
-			serialize(item) {
-				// remove stuff like this from sitemap: <xhtml:link rel="alternate" hreflang="de" href="https://simonschwitz.ky/"/>
-				let targetLink = undefined;
-				item.links = item.links?.filter((link) => {
-					if (link.lang === defaultLocale && link.url.includes(site + '/' + defaultLocale) === false) {
-						targetLink = link;
-						return false;
-					}
-					return true;
-				});
-
-				if (typeof targetLink !== 'undefined') {
-					targetLink.lang = 'x-default';
-					item.links?.push(targetLink);
-				}
-
-				return item;
 			},
 		}),
 	],
@@ -51,18 +33,10 @@ export default defineConfig({
 	i18n: {
 		locales,
 		defaultLocale,
+		routing: {
+			prefixDefaultLocale: false,
+		},
 	},
-	//i18n: {
-	//	defaultLocale,
-	//	locales,
-	//	routing: {
-	//		prefixDefaultLocale: true,
-	//		redirectToDefaultLocale: false,
-	//	},
-	//	fallback: {
-	//		en: 'de',
-	//	},
-	//},
 	site,
 	output: 'hybrid',
 	server: {

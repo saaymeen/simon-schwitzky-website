@@ -1,0 +1,28 @@
+---
+import type { InferGetStaticParamsType } from 'astro';
+import { About, HireMe, Masthead, ScheduleCall, Services, Testimonials, Work } from 'blocks';
+import { BaseLayout } from 'layouts';
+
+export async function getStaticPaths() {
+	const pages = [{ lang: 'en' }, { lang: 'de' }];
+	return pages.map(({ lang }) => ({ params: { lang } }));
+}
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+
+const { lang } = Astro.params as Params;
+---
+
+<BaseLayout lang={lang} title={'Simon Schwitzky'}>
+	<main class="flex flex-1 flex-col">
+		<Masthead />
+		<About />
+		<Work />
+		<Services />
+		<Testimonials />
+		{/*<Newsletter />*/}
+		<HireMe />
+		{/*<Editorial />*/}
+		<ScheduleCall />
+	</main>
+</BaseLayout>

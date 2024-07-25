@@ -2,7 +2,7 @@ import { useRef, type ReactNode, useCallback, useEffect, useState, useMemo } fro
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
 import clsx from 'clsx';
-import { getTranslation } from '../../utils/i18n';
+import { getTranslation } from 'utils/i18n';
 
 interface TestimonialSliderProps {
 	currentLocale: string | undefined;

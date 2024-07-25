@@ -1,0 +1,64 @@
+---
+import { LuArrowUpRight } from 'react-icons/lu/index.js';
+import { Anchor, RotatingCircleText } from 'components/astro';
+
+import { Image } from 'astro:assets';
+
+import profileImage from 'assets/fpv-simon.png';
+import { getTranslation } from 'utils/i18n';
+
+const translations = {
+	en: {
+		tagline: 'Hi, I am Simon 👋🏼',
+		title: 'Effortless collaboration<br/>Engineer of your choice',
+		text: 'Back in school nobody understood that I used to skip class so I could work on mobile applications for a small agency in my home-town. Today, I am passionate about my work and wake up excited everyday to deliver beyond expecations on amazing projects. I am insanely proud of the partnerships I partook in the past couple of years and am ready to conquer new challenges.',
+		cta: 'See CV',
+		circle: 'Open for new opportunities! - Hire me now! -',
+	},
+	de: {
+		tagline: 'Hallo, ich bin Simon 👋🏼',
+		title: 'Mit mir endet<br/>Ihr digitaler Blindflug',
+		text: 'In der Schule hat niemand verstanden, dass ich abwesend war um an Apps für eine kleine Agentur aus meiner Heimatstadt zu arbeiten. Heute arbeite ich mit Leidenschaft vollberuflich in der Branche und wache jeden Tag mit einem Lächeln auf, um mit außergewöhnlichen Projekten die Erwartungen meiner Kunden zu übertreffen.',
+		cta: 'Lebenslauf ansehen',
+		circle: 'Offen für neue Aufträge - Open for hire -',
+	},
+};
+
+const translation = getTranslation(Astro.currentLocale, translations);
+---
+
+<section id="about" class="flex flex-col bg-white px-4 sm:px-12">
+	<div class="mx-auto flex w-full max-w-7xl flex-col pb-16 pt-24 md:grid md:grid-cols-2">
+		<div class="flex flex-col">
+			<div class="flex justify-between">
+				<div class="flex flex-col">
+					<span class="mb-1 text-neutral-600" set:html={translation.tagline} />
+					<h2 class="text-5xl" set:html={translation.title} />
+					<p class="mt-7 max-w-md" set:html={translation.text} />
+				</div>
+			</div>
+
+			{
+				/*<Anchor
+				icon={LuArrowUpRight}
+				href="/cv"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="mt-7 self-start"
+				theme="primary"
+				iconAnimation="top-right"
+				set:html={translation.cta}
+			/>*/
+			}
+		</div>
+
+		<div class="relative mt-12 flex flex-row justify-center md:ml-12 md:mt-0">
+			<div class="relative aspect-[9/16] h-72 md:h-full md:w-auto">
+				<Image src={profileImage} alt="" class="absolute h-full w-full object-cover" />
+				<div class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+					<RotatingCircleText label={translation.circle} width={100} height={100} />
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

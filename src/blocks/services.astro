@@ -1,0 +1,187 @@
+---
+import { LuPhoneCall } from 'react-icons/lu/index.js';
+
+import { Anchor, Socials } from 'components/astro';
+import { getTranslation } from 'utils/i18n';
+
+import mock from 'assets/laptop-mock.jpg';
+import { Image } from 'astro:assets';
+import { HiCodeBracketSquare, HiMiniCheckBadge } from 'react-icons/hi2';
+import { TbBulbFilled, TbStarFilled } from 'react-icons/tb';
+
+const translations = {
+	en: {
+		tagline: 'Delivering beyond expecations',
+		title: 'Services I offer',
+		cta: 'Read more',
+		text: 'Explore a world of innovation with my comprehensive suite of services.<br/>Elevate your digital presence with my tailored solutions.',
+		connect: 'Connect and profit:',
+		appTitle: 'App',
+		appNiche: 'Development',
+		appText:
+			'Mobile application design, development and maintenance for smartphones, tablets and wearable devices.',
+		webAndSocialTitle: 'Website & Social',
+		webAndSocialNiche: 'Creation & Management',
+		webAndSocialText:
+			'Website & E-Commerce design, development and maintenance. Targeted ad campaings, optionally Instagram and TikTok management.',
+		mvpTitle: 'MVP',
+		mvpNiche: 'Development',
+		mvpText:
+			'Rapid prototyping and idea validation including multiple iterations and pivots. Unlimited integrations.',
+		clientsInfo: 'Clients trust my process',
+		ratingTitle: 'Average client rating',
+		ratingSmall: 'based on customer-success polls for completed projects',
+		scheduleCall: 'Scheule call',
+		contactMe: "Let's talk",
+		quote: 'What if it turns<br />out better than you<br />can imagine?',
+		quoteText:
+			"As an ex-startup founder, I know both sides of the coin. I have been working in this industry for over eight years now and still work on mastering the balance between business things and technical details.<br /><br />I am proud of my recent partnerships and learned one important thing: There is never enough time to meet a deadline and never enough money to be spent on a project. Your life simply suffers when you spread yourself too thin.<br /><br />That's why I precisely fine-tuned my services to the offering I have today. I will accompany you fron idea to product and beyond. You will never have to juggle again between efficiency and quality, because you have me. But don't take my word for it.",
+	},
+	de: {
+		tagline: 'Verlassen Sie sich drauf:',
+		title: 'Was andere über mich sagen',
+		cta: 'Mehr erfahren',
+		text: 'Entdecken Sie eine Welt voller Innovation mit meinem allumfassenden Angebot and Dienstleistungen.<br/>Verbessern Sie Ihre digitale Präsenz mit meinen maßgeschneiderten Lösungen.',
+		connect: 'Netzwerk entdecken:',
+		appTitle: 'App',
+		appNiche: 'Entwicklung',
+		appText: 'Design, Entwicklung und Wartung von Apps für Smartphones, Tablets und Wearables.',
+		webAndSocialTitle: 'Website & Social',
+		webAndSocialNiche: 'Entwicklung & Management',
+		webAndSocialText:
+			'Design, Entwicklung und Service von Websiten. Werbekampagnen, optional Verwaltung & Betreuung von Instagram & TikTok.',
+		mvpTitle: 'MVP',
+		mvpNiche: 'Entwicklung',
+		mvpText:
+			'Rapid prototyping und Ideenvalidierung über mehrere Revisionen. Unbegrenzte Integrationsmöglichkeiten.',
+		clientsInfo: 'Kunden vertrauen meiner Arbeit',
+		ratingTitle: 'Durchschnittliche Kundenbewertung',
+		ratingSmall: 'gemessen an Zufrienheitsumfragen für abgeschlossene Projekte',
+		scheduleCall: 'Anruf vereinbaren',
+		contactMe: 'Jetzt Kontakt<br/>aufnehmen',
+		quote: 'Was wenn es besser<br />wird, als du es dir je<br />hättest vorstellen<br/>können?',
+		quoteText:
+			'Als Ex Startup-Gründer kann ich meine Projekte aus verschiedenen Blickwinkeln betrachten. Seit über acht jahren bin ich im Tech-Sektor tätig und arbeite immer noch an der Balance zwischen Business und technischen Details.<br/><br/>In meinen vergangenen Partnerschaften konnte ich vor allem eins lernen: Es gibt nie genug Zeit für eine Deadline und das Budget für ein Projekt kann die groß genug sein. Am Ende leidet immer das Privatleben, wenn man auf zu vielen Hochzeiten tanzt.<br/><br/>Aus diesem Grund konzetriere ich mich in meiner Selbstständigkeit auf ausgewählte Dienstleistungen. Ich begleite Sie von der Idee bis zum Produkt und darüber hinaus. Schluss mit dem Jonglieren zwischen Effizienz und Qualität, denn Sie haben mich.',
+	},
+};
+
+const translation = getTranslation(Astro.currentLocale, translations);
+
+const services = [
+	{
+		name: translation.appTitle,
+		niche: translation.appNiche,
+		text: translation.appText,
+		icon: HiCodeBracketSquare,
+		cta: translation.cta,
+	},
+	{
+		name: translation.webAndSocialTitle,
+		niche: translation.webAndSocialNiche,
+		text: translation.webAndSocialText,
+		icon: HiMiniCheckBadge,
+		cta: translation.cta,
+	},
+	{
+		name: translation.mvpTitle,
+		niche: translation.mvpNiche,
+		text: translation.mvpText,
+		icon: TbBulbFilled,
+		cta: translation.cta,
+	},
+];
+---
+
+<section class="bg-black text-white">
+	<div class="relative overflow-hidden">
+		<div class="px-4 pt-24 sm:px-12">
+			<div class="relative z-20 mx-auto flex w-full max-w-7xl flex-col pb-16 pt-16">
+				<span class="mb-1 text-neutral-200">{translation.tagline}</span>
+				<h2 class="mb-12 text-5xl text-white" set:html={translation.title} />
+				<p set:html={translation.text} />
+
+				<ul class="mb-5 mt-12 flex flex-col gap-12 lg:grid lg:grid-cols-3">
+					{
+						services.map((service) => (
+							<li class="flex flex-col">
+								<div class="flex items-center">
+									<span class="flex h-8 w-8 items-center justify-center rounded-sm bg-white ">
+										<service.icon className="text-black" />
+									</span>
+									<div class="ml-2 flex flex-col">
+										<h3 class="text-sm font-bold">{service.name}</h3>
+										<span class="text-xs text-neutral-400">{service.niche}</span>
+									</div>
+								</div>
+								<p class="mb-2 mt-3 max-w-xs text-sm text-neutral-200" set:html={service.text} />
+								{/*<Anchor
+									iconAnimation="right"
+									icon={LuArrowRight}
+									set:html={service.cta}
+									class="self-start"
+								/>*/}
+							</li>
+						))
+					}
+				</ul>
+				<div class="mt-7 flex justify-end">
+					<div class="flex flex-col">
+						<span class="text-sm text-neutral-200">{translation.connect}</span>
+						<Socials theme="dark" class="mt-2" />
+					</div>
+				</div>
+			</div>
+
+			<div class="absolute inset-0 hidden h-full w-full">
+				<div class="absolute inset-0 z-10 h-full w-full bg-black/70"></div>
+				<Image class="absolute inset-0 z-[9] h-full w-full object-cover" src={mock} alt="" />
+			</div>
+		</div>
+	</div>
+
+	<div class="relative overflow-hidden bg-neutral-100 text-black md:px-12">
+		<div
+			class="w-ful mx-auto grid max-w-7xl grid-cols-1 grid-rows-[1fr,auto,1fr,1fr] md:grid-cols-[1fr,auto,1fr,1fr] md:grid-rows-1"
+		>
+			<article class="flex flex-col justify-between px-4 pt-12 sm:px-12 md:py-12 md:pl-0 md:pr-0">
+				<span class="text-5xl font-medium">27+</span>
+				<div class="flex flex-col">
+					<span set:html={translation.clientsInfo} />
+				</div>
+			</article>
+			<span class="mx-4 my-12 h-px bg-neutral-600 sm:mx-12 md:mx-0 md:h-auto md:w-px"></span>
+			<article class="flex flex-col px-4 py-7 sm:px-12 md:px-8 md:py-12">
+				<span class="text-5xl font-medium"
+					>4.8 <span class="text-3xl font-normal text-neutral-600">/5</span></span
+				>
+				<div class="mt-1 flex items-center space-x-1 text-amber-500">
+					{Array.from(Array(5).keys()).map(() => <TbStarFilled />)}
+				</div>
+				<div class="mt-7 flex flex-col justify-self-end">
+					<span class="text-sm text-neutral-800" set:html={translation.ratingTitle} />
+					<span class="mt-1 text-xs text-neutral-600" set:html={translation.ratingSmall} />
+				</div>
+			</article>
+			<article class="z-10 bg-blue-600 px-4 text-white sm:px-12 md:pl-8 md:pr-8">
+				<span class="absolute z-[5] block h-full w-full bg-blue-600"></span>
+				<div
+					class="relative z-10 flex h-full w-full flex-row-reverse items-center justify-between bg-blue-600 py-7 text-white md:flex-col md:justify-between md:py-12"
+				>
+					<div class="flex flex-row justify-between">
+						<Anchor theme="white" set:html={translation.scheduleCall} icon={LuPhoneCall} />
+					</div>
+					<div class="flex flex-row justify-between">
+						<span class="text-3xl font-medium text-white" set:html={translation.contactMe} />
+					</div>
+				</div>
+			</article>
+		</div>
+	</div>
+
+	<div class="bg-white px-4 pb-16 pt-24 sm:px-12">
+		<div class="mx-auto flex w-full max-w-7xl justify-between text-black">
+			<p class="text-xl font-medium" set:html={translation.quote} />
+			<p class="ml-12 hidden max-w-md md:flex" set:html={translation.quoteText} />
+		</div>
+	</div>
+</section>
